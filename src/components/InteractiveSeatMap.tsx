@@ -246,7 +246,7 @@ export default function InteractiveSeatMap({
 
     return (
         <div
-            className="relative w-full h-[600px] border border-gray-200 rounded-sm overflow-hidden shadow-sm flex items-center justify-center bg-gray-50 cursor-grab active:cursor-grabbing"
+            className="relative w-full h-full border border-gray-200 rounded-sm overflow-hidden shadow-sm flex items-center justify-center bg-gray-50 cursor-grab active:cursor-grabbing"
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}

@@ -31,8 +31,11 @@ export default function EventHeader() {
 
             {/* Breadcrumbs and Event Title Row */}
             <div className="px-4 py-4 md:px-6 border-t border-white/10">
-                <div className="text-xs text-gray-400 mb-1">
-                    <span className="hover:underline cursor-pointer">Home</span> / <span className="hover:underline cursor-pointer">Concert Tickets</span> / <span className="hover:underline cursor-pointer">Pop</span> / <span className="text-white">BTS</span>
+                <div className="flex flex-wrap gap-1 text-xs text-gray-400 mb-2">
+                    <span className="hover:underline cursor-pointer">Home</span> /
+                    <span className="hover:underline cursor-pointer">Concert Tickets</span> /
+                    <span className="hover:underline cursor-pointer">Pop</span> /
+                    <span className="text-white">BTS</span>
                 </div>
 
                 <div className="flex flex-col md:flex-row md:items-center gap-4">
@@ -44,13 +47,13 @@ export default function EventHeader() {
 
                     <div className="flex-1">
                         <div className="flex items-center gap-3">
-                            <h1 className="text-xl md:text-2xl font-bold">BTS WORLD TOUR 'ARIRANG' IN TORONTO</h1>
-                            <button className="hidden sm:flex items-center gap-1 px-3 py-1 rounded-full border border-gray-500 text-xs hover:border-white transition">
+                            <h1 className="text-xl md:text-2xl font-bold leading-tight">BTS WORLD TOUR 'ARIRANG' IN TORONTO</h1>
+                            <button className="hidden sm:flex items-center gap-1 px-3 py-1 rounded-full border border-gray-500 text-xs hover:border-white transition shrink-0">
                                 <Info className="w-3 h-3" />
                                 More Info
                             </button>
                         </div>
-                        <div className="text-sm text-gray-300 mt-1 flex items-center gap-2">
+                        <div className="text-sm text-gray-300 mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
                             <span>Sun • Jan 25 • 7:00 PM</span>
                             <span className="hidden sm:inline text-gray-500">|</span>
                             <span className="underline hover:no-underline cursor-pointer">Rogers Centre, Toronto, ON</span>

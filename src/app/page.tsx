@@ -59,21 +59,21 @@ export default function HomePage() {
         className="fixed inset-0 z-[100] flex bg-white"
         style={{ fontFamily: "'Comic Sans MS', 'Comic Sans', cursive" }}
       >
-        <div className="flex flex-col items-start justify-center flex-1 px-[50px] pt-24">
-          <div className="max-w-xl space-y-8">
-            <div className="space-y-4">
-              <h1 className="text-4xl font-bold tracking-tight text-[#1f262d]">
+        <div className="flex flex-col items-start justify-center flex-1 px-6 md:px-[50px] pt-12 md:pt-24">
+          <div className="max-w-xl space-y-6 md:space-y-8">
+            <div className="space-y-3 md:space-y-4">
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-[#1f262d]">
                 BTS Ticketmaster Training
               </h1>
-              <p className="text-xl font-normal leading-relaxed text-[#1f262d] md:text-2xl">
+              <p className="text-lg md:text-2xl font-normal leading-relaxed text-[#1f262d]">
                 BTS is going on tour but tickets are hard to get, so i made this website to train yourself when the day of war arrives. Best of luck ARMY!건배
               </p>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
               <button
                 onClick={handleStart}
-                className="group relative overflow-hidden rounded-[2px] bg-[#026cdf] px-12 py-3 text-lg font-bold text-white transition-all hover:bg-[#025ec2] active:scale-95 shadow-sm"
+                className="group relative overflow-hidden rounded-[2px] bg-[#026cdf] px-8 md:px-12 py-3 text-base md:text-lg font-bold text-white transition-all hover:bg-[#025ec2] active:scale-95 shadow-sm text-center"
               >
                 <span className="relative z-10 tracking-widest uppercase">start</span>
                 <div className="absolute inset-0 -translate-x-full bg-white/10 transition-transform group-hover:translate-x-0" />
@@ -82,7 +82,8 @@ export default function HomePage() {
               {!isCameraEnabled && (
                 <button
                   onClick={enableCamera}
-                  className="rounded-[2px] border-2 border-[#026cdf] px-8 py-3 text-lg font-bold text-[#026cdf] transition-all hover:bg-[#026cdf]/5 active:scale-95"
+                  style={{ color: "#026cdf" }}
+                  className="rounded-[2px] border-2 border-[#026cdf] px-6 md:px-8 py-3 text-base md:text-lg font-bold text-[#026cdf] transition-all hover:bg-[#026cdf]/5 active:scale-95 whitespace-nowrap"
                 >
                   Turn on speedrunner facecam
                 </button>
@@ -106,7 +107,7 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-black/5 pointer-events-none" />
         </div>
 
-        <div className="absolute bottom-6 left-[50px] text-gray-400 font-bold text-lg z-20">
+        <div className="absolute bottom-6 left-6 md:left-[50px] text-gray-400 font-bold text-lg z-20">
           @immike_wing
         </div>
       </div>
@@ -128,12 +129,12 @@ export default function HomePage() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
-        <div className="relative mx-auto mt-20 flex h-full max-w-[1440px] flex-col justify-center px-6 pb-20 text-white">
-          <h1 className="text-5xl font-bold tracking-tight text-white mb-2 ml-4">BTS WORLD TOUR 'ARIRANG' IN TORONTO</h1>
-          <p className="text-lg font-medium text-white/90 ml-4 mb-8">Presale: Thu, Jan 22, 2026 @ 01:00 pm EST</p>
+        <div className="relative mx-auto mt-10 md:mt-20 flex h-full max-w-[1440px] flex-col justify-center px-6 pb-10 md:pb-20 text-white">
+          <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-2 md:ml-4 leading-tight">BTS WORLD TOUR 'ARIRANG' IN TORONTO</h1>
+          <p className="text-base md:text-lg font-medium text-white/90 md:ml-4 mb-6 md:mb-8">Presale: Thu, Jan 22, 2026 @ 01:00 pm EST</p>
 
           <Link href="/queue">
-            <button className="bg-[#026cdf] text-white font-bold py-3 px-6 rounded-[3px] hover:bg-[#025ec2] transition w-fit ml-4 text-sm uppercase tracking-wider">
+            <button className="bg-[#026cdf] text-white font-bold py-3 px-6 rounded-[3px] hover:bg-[#025ec2] transition w-fit md:ml-4 text-sm uppercase tracking-wider">
               Find Tickets
             </button>
           </Link>

@@ -184,26 +184,28 @@ export default function TicketList({
                                         onClick={() => setSelectedTicket(ticket)}
                                         className="flex gap-4 p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer group animate-in fade-in slide-in-from-bottom-2 duration-300"
                                     >
-                                        {/* Seat Icon */}
-                                        <div className="w-12 h-12 shrink-0 border border-gray-200 rounded flex items-center justify-center bg-gray-50 group-hover:bg-white transition-colors">
-                                            <div className="w-6 h-6 border-2 border-gray-400 rounded-sm grid grid-cols-2 gap-[1px]">
-                                                <div className="bg-gray-400" />
-                                                <div className="bg-gray-400" />
-                                                <div className="bg-gray-400" />
-                                                <div className="bg-blue-600" />
-                                            </div>
+                                        {/* Mini Map Thumbnail */}
+                                        <div className="w-14 h-14 shrink-0 rounded overflow-hidden bg-gray-100 flex items-center justify-center">
+                                            <img
+                                                src="/map.svg"
+                                                alt="Section"
+                                                className="w-full h-full object-contain opacity-60"
+                                            />
+                                            <div className="absolute w-2 h-2 bg-[#026cdf] rounded-full" />
                                         </div>
 
                                         <div className="flex-1 min-w-0">
                                             <div className="flex justify-between items-start">
                                                 <div>
                                                     <h3 className="font-bold text-[#1f262d] text-sm">Sec {ticket.sec} • Row {ticket.row}</h3>
-                                                    <p className="text-xs text-gray-500 mt-0.5">{ticket.type}</p>
+                                                    <p className="text-xs text-gray-500 mt-0.5">Verified Resale Ticket</p>
                                                 </div>
                                                 <div className="text-right">
                                                     <div className="font-bold text-[#026cdf]">CA ${ticket.price.toFixed(2)}</div>
-                                                    <div className="text-[10px] text-gray-400 mt-1">
-                                                        CA ${(ticket.price + ticket.fee).toFixed(2)} fees, including taxes
+                                                    <div className="text-[10px] text-gray-400 mt-1 leading-tight">
+                                                        (CA ${(ticket.price - ticket.fee).toFixed(2)}<br />
+                                                        + CA ${ticket.fee.toFixed(2)} fees,<br />
+                                                        including taxes)
                                                     </div>
                                                 </div>
                                             </div>

@@ -47,19 +47,19 @@ export default function QueuePage() {
         <div className="min-h-screen w-full bg-[#020202] text-white font-sans">
             {/* Top Header: Event Info (Ticketmaster style) */}
             <header className="fixed top-0 left-0 right-0 z-50 bg-[#020202] border-b border-white/10 shadow-lg">
-                <div className="max-w-[1440px] mx-auto px-4 md:px-8 py-5">
-                    <div className="flex items-center gap-10">
+                <div className="max-w-[1440px] mx-auto px-4 md:px-8 py-4 md:py-5">
+                    <div className="flex items-center gap-4 md:gap-10">
                         {/* Logo */}
                         <div className="shrink-0">
-                            <span className="text-2xl font-bold italic tracking-tighter text-white">ticketmaster</span>
+                            <span className="text-xl md:text-2xl font-bold italic tracking-tighter text-white">ticketmaster</span>
                         </div>
 
                         {/* Event Details */}
                         <div className="flex-1 min-w-0">
-                            <h1 className="text-xl md:text-2xl font-bold mb-0.5 truncate uppercase">BTS WORLD TOUR 'ARIRANG' IN TORONTO</h1>
-                            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm md:text-base font-medium text-gray-400">
+                            <h1 className="text-lg md:text-2xl font-bold mb-0.5 truncate uppercase">BTS WORLD TOUR 'ARIRANG' IN TORONTO</h1>
+                            <div className="flex flex-col md:flex-row md:items-center gap-y-1 md:gap-x-4 text-xs md:text-sm font-medium text-gray-400">
                                 <span>Thu • Jan 22, 2026 • 7:00 pm</span>
-                                <span className="hidden sm:inline">|</span>
+                                <span className="hidden md:inline">|</span>
                                 <span>Rogers Centre, Toronto, ON</span>
                             </div>
                         </div>
@@ -75,8 +75,8 @@ export default function QueuePage() {
                     </div>
 
                     {/* Progress Stepper - Integrated into Header */}
-                    <div className="w-full max-w-[900px] mx-auto mt-10 mb-2">
-                        <div className="relative flex items-center justify-between text-[10px] md:text-[11px] font-bold tracking-widest text-[#444444] uppercase">
+                    <div className="w-full max-w-[900px] mx-auto mt-6 md:mt-10 mb-2">
+                        <div className="relative flex items-center justify-between text-[9px] md:text-[11px] font-bold tracking-widest text-[#444444] uppercase">
                             {/* Lines */}
                             <div className="absolute top-[5px] left-0 right-0 h-[2.5px] bg-[#222222] -z-0 rounded-full" />
                             <div className="absolute top-[5px] left-0 w-[75%] h-[2.5px] bg-white -z-0 rounded-full" />
@@ -107,7 +107,7 @@ export default function QueuePage() {
             </header>
 
             {/* Main Content Area */}
-            <main className="pt-[280px] pb-20 px-4 flex flex-col items-center justify-center">
+            <main className="pt-[220px] md:pt-[280px] pb-20 px-4 flex flex-col items-center justify-center">
 
                 {/* Queue Status Card */}
                 <div
@@ -116,13 +116,13 @@ export default function QueuePage() {
                 >
                     <div className="h-2 bg-[#026cdf] w-full" /> {/* Top Blue Bar */}
 
-                    <div className="p-10 md:p-14 flex flex-col items-center text-center">
+                    <div className="p-6 md:p-14 flex flex-col items-center text-center">
                         <h2 className="text-xl md:text-2xl font-black mb-8 tracking-tight uppercase">You Are Now In The Queue</h2>
                         <div className="relative">
-                            <span className="text-[60px] md:text-[90px] font-black text-[#026cdf] leading-none mb-3 block">
+                            <span className="text-[50px] md:text-[90px] font-black text-[#026cdf] leading-none mb-3 block">
                                 {(queueState?.position || 0).toLocaleString()}
                             </span>
-                            <p className="text-[11px] font-extrabold tracking-[0.2em] text-gray-500 uppercase mb-12">People Ahead of You</p>
+                            <p className="text-[10px] md:text-[11px] font-extrabold tracking-[0.2em] text-gray-500 uppercase mb-12">People Ahead of You</p>
                         </div>
 
                         {/* Progress Bar */}
@@ -140,7 +140,7 @@ export default function QueuePage() {
                         </div>
 
                         <div className="border-t border-gray-300 w-full pt-6">
-                            <p className="text-[11px] text-gray-400 font-mono tracking-widest uppercase">
+                            <p className="text-[10px] md:text-[11px] text-gray-400 font-mono tracking-widest uppercase">
                                 QUEUE ID: 33031168-174D-4CFA-96AC-633C48859E07
                             </p>
                         </div>

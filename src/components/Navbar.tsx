@@ -6,7 +6,7 @@ export default function Navbar() {
         <div className="flex flex-col w-full font-sans">
             {/* Top Black Bar */}
             <div className="bg-[#1f262d] text-white text-[11px] font-medium tracking-wide">
-                <div className="mx-auto flex h-[36px] max-w-[1440px] items-center justify-between px-6">
+                <div className="mx-auto flex h-[36px] max-w-[1440px] items-center justify-between px-4 md:px-6">
                     {/* Left Side: Region/Lang */}
                     <div className="flex items-center gap-4">
                         <button className="flex items-center gap-1.5 opacity-90 hover:opacity-100">
@@ -23,7 +23,7 @@ export default function Navbar() {
                     </div>
 
                     {/* Right Side: Links */}
-                    <div className="flex items-center gap-6">
+                    <div className="hidden md:flex items-center gap-6">
                         <Link href="#" className="hover:text-gray-300">Hotels</Link>
                         <Link href="#" className="hover:text-gray-300">Sell</Link>
                         <Link href="#" className="flex items-center gap-1 hover:text-gray-300">
@@ -40,15 +40,15 @@ export default function Navbar() {
             </div>
 
             {/* Main Blue Header */}
-            <header className="bg-[#0059e3] text-white pb-8">
-                <div className="mx-auto max-w-[1440px] px-8">
+            <header className="bg-[#0059e3] text-white pb-4 md:pb-8">
+                <div className="mx-auto max-w-[1440px] px-4 md:px-8">
                     {/* Top Row: Logo & Nav & Account */}
-                    <div className="flex h-[84px] items-center justify-between">
+                    <div className="flex h-[60px] md:h-[84px] items-center justify-between">
                         <div className="flex items-center gap-10">
                             {/* Logo */}
                             <Link href="/" className="flex items-center group">
-                                <span className="text-[28px] font-bold tracking-tighter italic">ticketmaster</span>
-                                <span className="text-[10px] relative -top-3 ml-0.5">®</span>
+                                <span className="text-xl md:text-[28px] font-bold tracking-tighter italic">ticketmaster</span>
+                                <span className="text-[8px] md:text-[10px] relative -top-2 md:-top-3 ml-0.5">®</span>
                             </Link>
 
                             {/* Main Navigation */}
@@ -64,14 +64,14 @@ export default function Navbar() {
                         {/* Account */}
                         <div className="flex items-center gap-2 hover:opacity-80 cursor-pointer">
                             <User className="w-6 h-6 border-2 border-transparent rounded-full" />
-                            <span className="text-[16px] font-semibold">My Account</span>
+                            <span className="hidden md:inline text-[16px] font-semibold">My Account</span>
                         </div>
                     </div>
 
                     {/* Bottom Row: Search Bar */}
-                    <div className="flex w-full h-[64px] bg-white rounded-[4px] overflow-hidden text-[#1f262d] shadow-sm items-center px-1" style={{ fontFamily: "Averta, helvetica, arial, sans-serif" }}>
+                    <div className="flex w-full h-[50px] md:h-[64px] bg-white rounded-[4px] overflow-hidden text-[#1f262d] shadow-sm items-center px-1" style={{ fontFamily: "Averta, helvetica, arial, sans-serif" }}>
                         {/* Location Segment */}
-                        <div className="flex-1 flex items-center px-6 h-full border-r border-gray-200 cursor-pointer group">
+                        <div className="hidden md:flex flex-1 items-center px-6 h-full border-r border-gray-200 cursor-pointer group">
                             <MapPin className="w-6 h-6 text-[#0059e3] mr-4 opacity-80" />
                             <div className="flex flex-col justify-center">
                                 <span className="text-[11px] font-extrabold tracking-wider text-[#1f262d] uppercase">Location</span>
@@ -80,7 +80,7 @@ export default function Navbar() {
                         </div>
 
                         {/* Dates Segment */}
-                        <div className="w-[240px] flex items-center px-6 h-full border-r border-gray-200 cursor-pointer group">
+                        <div className="hidden md:flex w-[240px] items-center px-6 h-full border-r border-gray-200 cursor-pointer group">
                             <Calendar className="w-6 h-6 text-[#0059e3] mr-4 opacity-80" />
                             <div className="flex flex-col justify-center flex-1">
                                 <span className="text-[11px] font-extrabold tracking-wider text-[#1f262d] uppercase">Dates</span>
@@ -90,20 +90,20 @@ export default function Navbar() {
                         </div>
 
                         {/* Search Input Segment */}
-                        <div className="flex-[1.5] flex items-center px-6 h-full">
-                            <Search className="w-6 h-6 text-[#0059e3] mr-4 opacity-80" />
+                        <div className="flex-1 flex items-center px-4 md:px-6 h-full">
+                            <Search className="w-5 h-5 md:w-6 md:h-6 text-[#0059e3] mr-3 md:mr-4 opacity-80" />
                             <div className="flex flex-col justify-center w-full">
-                                <span className="text-[11px] font-extrabold tracking-wider text-[#1f262d] uppercase">Search</span>
+                                <span className="hidden md:block text-[11px] font-extrabold tracking-wider text-[#1f262d] uppercase">Search</span>
                                 <input
                                     type="text"
                                     placeholder="Artist, Event or Venue"
-                                    className="text-[15px] text-gray-800 placeholder:text-gray-400 w-full border-none p-0 focus:ring-0 h-5 font-medium"
+                                    className="text-[14px] md:text-[15px] text-gray-800 placeholder:text-gray-400 w-full border-none p-0 focus:ring-0 h-5 font-medium"
                                 />
                             </div>
                         </div>
 
                         {/* Search Button */}
-                        <button className="bg-[#1055d4] text-white font-bold h-[48px] px-10 rounded-[4px] text-sm hover:bg-[#0d46b0] transition-colors mr-1">
+                        <button className="hidden md:block bg-[#1055d4] text-white font-bold h-[48px] px-10 rounded-[4px] text-sm hover:bg-[#0d46b0] transition-colors mr-1">
                             Search
                         </button>
                     </div>
