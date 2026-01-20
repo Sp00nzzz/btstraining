@@ -12,6 +12,14 @@ export const metadata: Metadata = {
     icon: '/favicon.png',
   },
   openGraph: {
+    title: "Ticketmaster Training for BTS",
+    description: "Practice your ticket buying skills for the upcoming BTS tour with this training simulator. Get ready for the war!",
+    images: ['/socialimage.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Ticketmaster Training for BTS",
+    description: "Practice your ticket buying skills for the upcoming BTS tour with this training simulator. Get ready for the war!",
     images: ['/socialimage.png'],
   },
 };
