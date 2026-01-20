@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-base: #f2f2f4;
+    --color-surface: #ffffff;
+    --color-ink: #1f262d;
+    --color-muted: #626569;
+    --color-accent: #026cdf;
+    --color-accent-soft: #ebf5ff;
+    --color-warn: #c51818;
+    --color-good: #258f33;
+  }
+
+  body {
+    @apply bg-base text-ink antialiased selection:bg-accent/20 selection:text-accent font-sans;
+  }
+}
