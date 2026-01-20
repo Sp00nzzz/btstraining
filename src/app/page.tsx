@@ -40,8 +40,9 @@ export default function HomePage() {
   useEffect(() => {
     if (splashVideoRef.current) {
       splashVideoRef.current.volume = 0.2;
+      splashVideoRef.current.muted = false;
     }
-  }, [hasStarted]);
+  }, []);
 
   const handleStart = () => {
     resetDemo();
@@ -96,11 +97,17 @@ export default function HomePage() {
             src="/splashscreen.mp4"
             autoPlay
             loop
+            muted
             playsInline
+            preload="auto"
             className="w-full h-full object-cover"
           />
           {/* Subtle overlay to blend if needed, but keeping it clean for now */}
           <div className="absolute inset-0 bg-black/5 pointer-events-none" />
+        </div>
+
+        <div className="absolute bottom-6 left-[50px] text-gray-400 font-bold text-lg z-20">
+          @immike_wing
         </div>
       </div>
     );

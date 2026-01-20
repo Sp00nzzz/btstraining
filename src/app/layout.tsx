@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Ticketmaster Training for BTS",
+  description: "Practice your ticket buying skills for the upcoming BTS tour with this training simulator. Get ready for the war!",
   icons: {
     icon: '/favicon.png',
   },

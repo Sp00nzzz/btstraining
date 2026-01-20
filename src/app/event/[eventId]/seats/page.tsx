@@ -38,7 +38,7 @@ export default function SeatsPage() {
         Object.keys(next).forEach(key => {
           if (next[key] > 0) {
             // Faster decay as requested
-            const decay = Math.random() * 0.15;
+            const decay = Math.random() * 0.35;
             next[key] = Math.max(0, next[key] - decay);
             changed = true;
           }

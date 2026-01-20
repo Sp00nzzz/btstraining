@@ -444,7 +444,7 @@ export default function InteractiveSeatMap({
                                         fill={isSelected ? '#1f8c2e' : (isBlue ? '#026cdf' : '#d1d5db')}
                                         className={`transition-colors duration-200 ${isBlue
                                             ? (isSelected ? 'cursor-pointer hover:fill-[#166020]' : 'cursor-pointer hover:fill-[#005fb0]')
-                                            : 'cursor-default transition-colors duration-1000' // Smooth transition for sold out
+                                            : 'cursor-default transition-colors duration-200' // Faster transition for sold out
                                             }`}
                                         onMouseEnter={(e) => {
                                             if (isSelected) {
