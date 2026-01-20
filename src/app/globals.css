@@ -17,4 +17,14 @@
   body {
     @apply bg-base text-ink antialiased selection:bg-accent/20 selection:text-accent font-sans;
   }
+
+  .dynamic-comic-font {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  }
+
+  @media (min-width: 768px) {
+    .dynamic-comic-font {
+      font-family: "Comic Sans MS", "Comic Sans", cursive;
+    }
+  }
 }

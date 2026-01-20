@@ -56,8 +56,7 @@ export default function HomePage() {
   if (!hasStarted) {
     return (
       <div
-        className="fixed inset-0 z-[100] flex bg-white"
-        style={{ fontFamily: "'Comic Sans MS', 'Comic Sans', cursive" }}
+        className="fixed inset-0 z-[100] flex bg-white dynamic-comic-font"
       >
         <div className="flex flex-col items-start justify-center flex-1 px-6 md:px-[50px] pt-12 md:pt-24">
           <div className="max-w-xl space-y-6 md:space-y-8">

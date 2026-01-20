@@ -38,8 +38,7 @@ export default function SuccessPage() {
 
     return (
         <div
-            className="min-h-screen bg-white flex flex-col items-center justify-center p-4 text-center"
-            style={{ fontFamily: '"Comic Sans MS", "Comic Sans", cursive' }}
+            className="min-h-screen bg-white flex flex-col items-center justify-center p-4 text-center dynamic-comic-font"
         >
             <div className="max-w-2xl w-full flex flex-col items-center gap-8">
 
