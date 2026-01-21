@@ -16,7 +16,7 @@ export default function QueuePage() {
     // Initialize queue state on mount
     useEffect(() => {
         setQueue({
-            position: 300,
+            position: 60,
             paused: false,
             etaSeconds: 300,
         });

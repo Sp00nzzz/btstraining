@@ -1,48 +1,23 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import EventCard from "@/components/EventCard";
 import { events } from "@/data/events";
 import { useTicketingStore } from "@/store/useTicketingStore";
-import { useFacecamStore } from "@/components/Facecam";
 import { useTimerStore } from "@/store/useTimerStore";
+import SplashScreen from "@/components/SplashScreen";
 
 export default function HomePage() {
   const [hasStarted, setHasStarted] = useState(false);
-  const [result, setResult] = useState<{ time: string; success: boolean } | null>(null);
-  const { isCameraEnabled, enableCamera } = useFacecamStore();
   const startTimer = useTimerStore((state) => state.startTimer);
-  const splashVideoRef = useRef<HTMLVideoElement>(null);
 
   const setEvent = useTicketingStore((state) => state.setEvent);
   const resetDemo = useTicketingStore((state) => state.resetDemo);
 
   useEffect(() => {
     setEvent(events[0]);
-    const endTime = sessionStorage.getItem("training_end_time");
-    const startTime = sessionStorage.getItem("training_start_time");
-
-    if (startTime && endTime) {
-      const diff = parseInt(endTime) - parseInt(startTime);
-      const minutes = Math.floor(diff / 60000);
-      const seconds = Math.floor((diff % 60000) / 1000);
-      const timeStr = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-      setResult({
-        time: timeStr,
-        success: diff < 120000 // 2 minutes
-      });
-      // Clear results after showing once
-      sessionStorage.removeItem("training_end_time");
-    }
   }, [setEvent]);
-
-  useEffect(() => {
-    if (splashVideoRef.current) {
-      splashVideoRef.current.volume = 0.2;
-      splashVideoRef.current.muted = false;
-    }
-  }, []);
 
   const handleStart = () => {
     resetDemo();
@@ -54,63 +29,7 @@ export default function HomePage() {
   };
 
   if (!hasStarted) {
-    return (
-      <div
-        className="fixed inset-0 z-[100] flex bg-white dynamic-comic-font"
-      >
-        <div className="flex flex-col items-start justify-center flex-1 px-6 md:px-[50px] pt-12 md:pt-24">
-          <div className="max-w-xl space-y-6 md:space-y-8">
-            <div className="space-y-3 md:space-y-4">
-              <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-[#1f262d]">
-                BTS Ticketmaster Training
-              </h1>
-              <p className="text-lg md:text-2xl font-normal leading-relaxed text-[#1f262d]">
-                BTS is going on tour but tickets are hard to get, so i made this website to train yourself when the day of war arrives. Best of luck ARMY!건배
-              </p>
-            </div>
-
-            <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-              <button
-                onClick={handleStart}
-                className="group relative overflow-hidden rounded-[2px] bg-[#026cdf] px-8 md:px-12 py-3 text-base md:text-lg font-bold text-white transition-all hover:bg-[#025ec2] active:scale-95 shadow-sm text-center"
-              >
-                <span className="relative z-10 tracking-widest uppercase">start</span>
-                <div className="absolute inset-0 -translate-x-full bg-white/10 transition-transform group-hover:translate-x-0" />
-              </button>
-
-              {!isCameraEnabled && (
-                <button
-                  onClick={enableCamera}
-                  style={{ color: "#026cdf" }}
-                  className="rounded-[2px] border-2 border-[#026cdf] px-6 md:px-8 py-3 text-base md:text-lg font-bold text-[#026cdf] transition-all hover:bg-[#026cdf]/5 active:scale-95 whitespace-nowrap"
-                >
-                  Turn on speedrunner facecam
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="hidden lg:block w-1/2 h-full bg-black relative">
-          <video
-            ref={splashVideoRef}
-            src="/splashscreen.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            className="w-full h-full object-cover"
-          />
-          {/* Subtle overlay to blend if needed, but keeping it clean for now */}
-          <div className="absolute inset-0 bg-black/5 pointer-events-none" />
-        </div>
-
-        <div className="absolute bottom-6 left-6 md:left-[50px] text-gray-400 font-bold text-lg z-20">
-          @immike_wing
-        </div>
-      </div>
-    );
+    return <SplashScreen onStart={handleStart} />;
   }
 
   return (

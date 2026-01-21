@@ -4,16 +4,21 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useTimerStore } from "@/store/useTimerStore";
+import { submitScore } from "@/lib/supabase";
+import Leaderboard from "@/components/Leaderboard";
+import LeaderboardDialog from "@/components/LeaderboardDialog";
 import confetti from "canvas-confetti";
 
 export default function SuccessPage() {
     const router = useRouter();
     const { startTime, stopTime, resetTimer } = useTimerStore();
     const [mounted, setMounted] = useState(false);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [submittedUsername, setSubmittedUsername] = useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [leaderboardKey, setLeaderboardKey] = useState(0);
 
-    // Calculate duration derived from store state
     const duration = (stopTime && startTime) ? stopTime - startTime : 0;
-    // 60000ms = 1 minute
     const isGoodTime = duration > 0 && duration <= 60000;
 
     useEffect(() => {
@@ -36,10 +41,22 @@ export default function SuccessPage() {
         return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(2, '0')}`;
     };
 
+    const handleSubmitScore = async (username: string) => {
+        if (!username || duration <= 0) return;
+
+        setIsSubmitting(true);
+        const result = await submitScore(username, duration);
+        setIsSubmitting(false);
+
+        if (result) {
+            setSubmittedUsername(username);
+            setIsDialogOpen(false);
+            setLeaderboardKey(prev => prev + 1);
+        }
+    };
+
     return (
-        <div
-            className="min-h-screen bg-white flex flex-col items-center justify-center p-4 text-center dynamic-comic-font"
-        >
+        <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4 text-center dynamic-comic-font">
             <div className="max-w-2xl w-full flex flex-col items-center gap-8">
 
                 {/* Time Display */}
@@ -69,6 +86,27 @@ export default function SuccessPage() {
                     </div>
                 )}
 
+                {/* Publish Button */}
+                {duration > 0 && !submittedUsername && (
+                    <button
+                        onClick={() => setIsDialogOpen(true)}
+                        className="px-8 py-4 bg-[#1f8c2e] hover:bg-[#177023] text-white font-bold text-lg rounded-lg shadow-md transition-all hover:scale-105 animate-in fade-in duration-500"
+                    >
+                        Publish to Leaderboard
+                    </button>
+                )}
+
+                {submittedUsername && (
+                    <p className="text-[#1f8c2e] font-bold animate-in fade-in duration-300">
+                        Score published as &quot;{submittedUsername}&quot;!
+                    </p>
+                )}
+
+                {/* Leaderboard */}
+                <div className="w-full pt-4">
+                    <Leaderboard key={leaderboardKey} highlightUsername={submittedUsername || undefined} />
+                </div>
+
                 {/* Action Button */}
                 <button
                     onClick={() => {
@@ -80,6 +118,14 @@ export default function SuccessPage() {
                     try to get a better time
                 </button>
             </div>
+
+            {/* Dialog */}
+            <LeaderboardDialog
+                isOpen={isDialogOpen}
+                onClose={() => setIsDialogOpen(false)}
+                onSubmit={handleSubmitScore}
+                isSubmitting={isSubmitting}
+            />
         </div>
     );
 }
