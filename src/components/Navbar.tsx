@@ -1,7 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import { Search, User, MapPin, Calendar, ChevronDown, Monitor } from "lucide-react";
+import CharacterAvatar from "@/components/CharacterAvatar";
+import { useFacecamStore } from "@/components/Facecam";
 
 export default function Navbar() {
+    const selectedCharacter = useFacecamStore((state) => state.selectedCharacter);
+
     return (
         <div className="flex flex-col w-full font-sans">
             {/* Top Black Bar */}
@@ -63,7 +69,11 @@ export default function Navbar() {
 
                         {/* Account */}
                         <div className="flex items-center gap-2 hover:opacity-80 cursor-pointer">
-                            <User className="w-6 h-6 border-2 border-transparent rounded-full" />
+                            {selectedCharacter ? (
+                                <CharacterAvatar size={28} className="border-2 border-white/50" />
+                            ) : (
+                                <User className="w-6 h-6 border-2 border-transparent rounded-full" />
+                            )}
                             <span className="hidden md:inline text-[16px] font-semibold">My Account</span>
                         </div>
                     </div>

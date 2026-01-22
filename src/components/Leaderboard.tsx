@@ -67,8 +67,13 @@ export default function Leaderboard({ highlightUsername }: { highlightUsername?:
               }`}
             >
               <div className="flex items-center gap-3">
-                <span className="w-8 h-8 flex items-center justify-center font-bold text-lg">
-                  {index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : `#${index + 1}`}
+                <span className={`w-8 h-8 flex items-center justify-center font-bold text-lg rounded-full ${
+                    index === 0 ? "bg-yellow-400 text-yellow-900" :
+                    index === 1 ? "bg-gray-300 text-gray-700" :
+                    index === 2 ? "bg-orange-400 text-orange-900" :
+                    "text-gray-500"
+                  }`}>
+                  {index + 1}
                 </span>
                 <span className={`font-semibold ${isHighlighted ? "text-[#026cdf]" : "text-gray-800"}`}>
                   {entry.username}

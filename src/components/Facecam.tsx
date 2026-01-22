@@ -3,16 +3,31 @@
 import { useEffect, useRef, useState } from "react";
 import { create } from "zustand";
 
+// Character card data - maps card number to the polaroid image
+export const characterCards: Record<number, string> = {
+    1: "/splash/instc1.png",
+    2: "/splash/instc2.png",
+    3: "/splash/instc3.png",
+    4: "/splash/instc4.png",
+    5: "/splash/instc5.png",
+    6: "/splash/instc6.png",
+    7: "/splash/instc7.png",
+};
+
 interface FacecamStore {
     isCameraEnabled: boolean;
+    selectedCharacter: number | null;
     enableCamera: () => void;
     disableCamera: () => void;
+    setSelectedCharacter: (character: number | null) => void;
 }
 
 export const useFacecamStore = create<FacecamStore>((set) => ({
     isCameraEnabled: false,
+    selectedCharacter: null,
     enableCamera: () => set({ isCameraEnabled: true }),
     disableCamera: () => set({ isCameraEnabled: false }),
+    setSelectedCharacter: (character) => set({ selectedCharacter: character }),
 }));
 
 export default function Facecam() {

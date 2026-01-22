@@ -57,66 +57,69 @@ export default function SuccessPage() {
 
     return (
         <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4 text-center dynamic-comic-font">
-            <div className="max-w-2xl w-full flex flex-col items-center gap-8">
+            <div className="w-full max-w-7xl flex flex-col lg:flex-row gap-12 items-center lg:items-start justify-center">
 
-                {/* Time Display */}
-                <div className="space-y-4">
-                    <h1 className="text-2xl font-bold uppercase tracking-wide text-gray-500">Total Time</h1>
-                    <p className="text-7xl font-bold text-[#026cdf]">
-                        {formatTime(duration)}
-                    </p>
+                {/* Left Column: Result & Actions */}
+                <div className="flex-1 flex flex-col items-center gap-8 w-full max-w-2xl">
+                    {/* Time Display */}
+                    <div className="space-y-4">
+                        <h1 className="text-2xl font-bold uppercase tracking-wide text-gray-500">Total Time</h1>
+                        <p className="text-7xl font-bold text-[#026cdf]">
+                            {formatTime(duration)}
+                        </p>
+                    </div>
+
+                    {/* Conditional Content */}
+                    {isGoodTime ? (
+                        <div className="space-y-6 flex flex-col items-center animate-in fade-in zoom-in duration-500">
+                            <h2 className="text-4xl font-black italic tracking-tighter text-[#1f8c2e]">YOU ARE PREPPED SOLDIER</h2>
+                            <div className="relative w-80 h-80">
+                                <Image
+                                    src="/soldier.webp"
+                                    alt="Soldier"
+                                    fill
+                                    className="object-contain"
+                                />
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500 py-8">
+                            <h2 className="text-3xl font-bold text-[#d10000]">you need to try faster than that</h2>
+                        </div>
+                    )}
+
+                    {/* Publish Button */}
+                    {duration > 0 && !submittedUsername && (
+                        <button
+                            onClick={() => setIsDialogOpen(true)}
+                            className="px-8 py-4 bg-[#1f8c2e] hover:bg-[#177023] text-white font-bold text-lg rounded-lg shadow-md transition-all hover:scale-105 animate-in fade-in duration-500"
+                        >
+                            Publish to Leaderboard
+                        </button>
+                    )}
+
+                    {submittedUsername && (
+                        <p className="text-[#1f8c2e] font-bold animate-in fade-in duration-300">
+                            Score published as &quot;{submittedUsername}&quot;!
+                        </p>
+                    )}
+
+                    {/* Action Button */}
+                    <button
+                        onClick={() => {
+                            resetTimer();
+                            router.push("/");
+                        }}
+                        className="mt-4 px-8 py-4 bg-[#026cdf] hover:bg-[#0256b1] text-white font-bold text-lg rounded-[2px] shadow-md transition-all hover:scale-105"
+                    >
+                        try to get a better time
+                    </button>
                 </div>
 
-                {/* Conditional Content */}
-                {isGoodTime ? (
-                    <div className="space-y-6 flex flex-col items-center animate-in fade-in zoom-in duration-500">
-                        <h2 className="text-4xl font-black italic tracking-tighter text-[#1f8c2e]">YOU ARE PREPPED SOLDIER</h2>
-                        <div className="relative w-80 h-80">
-                            <Image
-                                src="/soldier.webp"
-                                alt="Soldier"
-                                fill
-                                className="object-contain"
-                            />
-                        </div>
-                    </div>
-                ) : (
-                    <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500 py-8">
-                        <h2 className="text-3xl font-bold text-[#d10000]">you need to try faster than that</h2>
-                    </div>
-                )}
-
-                {/* Publish Button */}
-                {duration > 0 && !submittedUsername && (
-                    <button
-                        onClick={() => setIsDialogOpen(true)}
-                        className="px-8 py-4 bg-[#1f8c2e] hover:bg-[#177023] text-white font-bold text-lg rounded-lg shadow-md transition-all hover:scale-105 animate-in fade-in duration-500"
-                    >
-                        Publish to Leaderboard
-                    </button>
-                )}
-
-                {submittedUsername && (
-                    <p className="text-[#1f8c2e] font-bold animate-in fade-in duration-300">
-                        Score published as &quot;{submittedUsername}&quot;!
-                    </p>
-                )}
-
-                {/* Leaderboard */}
-                <div className="w-full pt-4">
+                {/* Right Column: Leaderboard */}
+                <div className="flex-1 w-full max-w-xl">
                     <Leaderboard key={leaderboardKey} highlightUsername={submittedUsername || undefined} />
                 </div>
-
-                {/* Action Button */}
-                <button
-                    onClick={() => {
-                        resetTimer();
-                        router.push("/");
-                    }}
-                    className="mt-4 px-8 py-4 bg-[#026cdf] hover:bg-[#0256b1] text-white font-bold text-lg rounded-[2px] shadow-md transition-all hover:scale-105"
-                >
-                    try to get a better time
-                </button>
             </div>
 
             {/* Dialog */}

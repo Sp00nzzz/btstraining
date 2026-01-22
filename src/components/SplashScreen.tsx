@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { useFacecamStore } from "@/components/Facecam";
 
 // Image assets from public/splash folder
@@ -51,77 +52,110 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
 
       {/* Decorative elements - Left side */}
       {/* Top left magazine/calendar */}
-      <div
+      <motion.div
         className="absolute hidden md:block"
-        style={{ left: "-84px", top: "-77px", transform: "rotate(13.69deg)" }}
+        style={{ left: "-84px", top: "-77px", rotate: 13.69 }}
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
       >
         <img src={imgImage23} alt="" className="w-[396px] h-[288px] object-cover" />
-      </div>
+      </motion.div>
 
       {/* Ticket */}
-      <div
+      <motion.div
         className="absolute hidden md:block"
-        style={{ left: "-54px", top: "137px", transform: "rotate(-11deg)" }}
+        style={{ left: "-54px", top: "137px", rotate: -11 }}
+        initial={{ opacity: 0, x: -30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
       >
         <img src={imgTicket1} alt="" className="w-[373px] h-[141px] object-cover" />
-      </div>
+      </motion.div>
 
       {/* Left side photo */}
-      <div
+      <motion.div
         className="absolute hidden md:block"
-        style={{ left: "-19px", top: "288px", transform: "rotate(-4.77deg)" }}
+        style={{ left: "-19px", top: "288px", rotate: -4.77 }}
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
       >
         <img src={imgImage30} alt="" className="w-[196px] h-[309px] object-cover" />
-      </div>
+      </motion.div>
 
       {/* Paper clip photos - left bottom */}
-      <div
+      <motion.div
         className="absolute hidden md:block"
-        style={{ left: "-10px", top: "403px", transform: "rotate(-55.96deg)" }}
+        style={{ left: "-10px", top: "403px", rotate: -55.96 }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4, delay: 0.4 }}
       >
         <img src={imgImage27} alt="" className="w-[130px] h-[195px] object-cover" />
-      </div>
+      </motion.div>
 
-      <div
+      <motion.div
         className="absolute hidden md:block"
-        style={{ left: "56px", top: "471px", transform: "rotate(22.61deg)" }}
+        style={{ left: "56px", top: "471px", rotate: 22.61 }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4, delay: 0.5 }}
       >
         <img src={imgImage27} alt="" className="w-[130px] h-[195px] object-cover" />
-      </div>
+      </motion.div>
 
       {/* Bottom left magazine */}
-      <div
+      <motion.div
         className="absolute hidden md:block"
-        style={{ left: "-84px", top: "498px", transform: "rotate(-17deg)" }}
+        style={{ left: "-84px", top: "498px", rotate: -17 }}
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
       >
         <img src={imgImage26} alt="" className="w-[200px] h-[449px] object-cover" />
-      </div>
+      </motion.div>
 
       {/* Top right ticket */}
-      <div
+      <motion.div
         className="absolute hidden lg:block"
-        style={{ right: "-134px", top: "-137px", transform: "rotate(-17.27deg)" }}
+        style={{ right: "-134px", top: "-137px", rotate: -17.27 }}
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
       >
         <img src={imgImage22} alt="" className="w-[447px] h-[183px] object-cover" />
-      </div>
+      </motion.div>
 
       {/* Bottom character stickers */}
-      <div
+      <motion.div
         className="absolute hidden md:block"
-        style={{ left: "107px", bottom: "-30px", transform: "rotate(3.56deg)" }}
+        style={{ left: "107px", bottom: "-30px", rotate: 3.56 }}
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.6 }}
       >
         <img src={imgImage29} alt="" className="w-[640px] h-[146px] object-cover" />
-      </div>
+      </motion.div>
 
       {/* "Choose Your Bias" sticker - top right */}
-      <div className="absolute hidden lg:block" style={{ right: "39px", top: "61px" }}>
+      <motion.div
+        className="absolute hidden lg:block"
+        style={{ right: "39px", top: "61px" }}
+        initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+        transition={{ duration: 0.5, delay: 0.4, type: "spring", stiffness: 200 }}
+      >
         <img src={imgBias} alt="Choose Your Bias" className="w-[323px] h-[90px] object-contain" />
-      </div>
+      </motion.div>
 
       {/* Polaroid photos grid - right side */}
-      <div
+      <motion.div
         className="absolute hidden lg:flex flex-wrap gap-0 items-center justify-center pointer-events-none"
         style={{ right: "-20px", top: "143px", width: "446px", padding: "20px" }}
+        initial={{ opacity: 0, x: 30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
       >
         {/* Row 1 */}
         <div
@@ -217,65 +251,68 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
             </div>
           )}
         </div>
-      </div>
+      </motion.div>
 
       {/* Main content - Center (shifted left by 300px on desktop) */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-4 md:-translate-x-[300px]">
-        {/* BTS Logo circle */}
-        <div className="relative mb-4 md:mb-0 md:absolute md:top-[50px] md:left-1/2 md:-translate-x-1/2 z-10">
-          <img src={imgEllipse} alt="" className="w-[170px] h-[170px] md:w-[290px] md:h-[290px]" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <img
-              src={imgBTSLogo}
-              alt="BTS"
-              className="w-[120px] md:w-[170px] h-auto object-contain"
-            />
-          </div>
-        </div>
-
-        {/* Yellow banner with title */}
-        <div className="relative mt-2 md:mt-[80px]">
-          {/* Yellow background */}
-          <div className="bg-[#faed3d] rounded-[50px] md:rounded-[90px] px-6 md:px-14 py-6 md:py-10">
-            {/* Border */}
-            <div className="border-[4px] md:border-[7px] border-[#474545] rounded-[38px] md:rounded-[70px] px-5 md:px-10 py-5 md:py-8">
-              <h1
-                className="text-[#474545] text-center text-xl md:text-[50px] leading-tight tracking-tighter"
-                style={{ fontFamily: "'Nashira Free', 'Comic Sans MS', cursive" }}
-              >
-                CONCERT TICKET<br />TRAINING
-              </h1>
+      <div className="absolute inset-0 flex flex-col items-center justify-center pl-8 pr-4 md:px-4 md:-translate-x-[300px]">
+        {/* Continuous grouping wrapper to keep elements together */}
+        <div className="flex flex-col items-center relative">
+          {/* BTS Logo circle */}
+          <div className="relative z-10 md:mb-[-190px] md:-translate-y-[70px]">
+            <img src={imgEllipse} alt="" className="w-[170px] h-[170px] md:w-[290px] md:h-[290px]" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <img
+                src={imgBTSLogo}
+                alt="BTS"
+                className="w-[120px] md:w-[170px] h-auto object-contain"
+              />
             </div>
           </div>
-        </div>
 
-        {/* Buttons row */}
-        <div className="md:absolute md:bottom-[190px] md:left-1/2 md:-translate-x-1/2 mt-5 md:mt-0 z-20 flex flex-col md:flex-row items-center gap-3 md:gap-4">
-          <button
-            onClick={onStart}
-            className="bg-white rounded-[18px] md:rounded-[19px] px-8 md:px-12 py-3 md:py-4 shadow-lg hover:shadow-xl transition-shadow active:scale-95"
-          >
-            <span
-              className="text-[#2b54a4] text-base md:text-[20px] font-normal whitespace-nowrap"
-              style={{ fontFamily: "'Nashira Free', 'Comic Sans MS', cursive" }}
-            >
-              Start the Timer
-            </span>
-          </button>
+          {/* Yellow banner with title */}
+          <div className="relative z-0 mt-[-40px] md:mt-0 pt-8 md:pt-10">
+            {/* Yellow background */}
+            <div className="bg-[#faed3d] rounded-[50px] md:rounded-[90px] px-6 md:px-14 py-6 md:py-10">
+              {/* Border */}
+              <div className="border-[4px] md:border-[7px] border-[#474545] rounded-[38px] md:rounded-[70px] px-5 md:px-10 py-5 md:py-8">
+                <h1
+                  className="text-[#474545] text-center text-xl md:text-[50px] leading-tight tracking-tighter"
+                  style={{ fontFamily: "'Nashira Free', 'Comic Sans MS', cursive" }}
+                >
+                  CONCERT TICKET<br />TRAINING
+                </h1>
+              </div>
+            </div>
+          </div>
 
-          {!isCameraEnabled && (
+          {/* Buttons row */}
+          <div className="relative mt-6 md:-mt-[70px] z-20 flex flex-col md:flex-row items-center gap-3 md:gap-4">
             <button
-              onClick={enableCamera}
-              className="bg-[#eb69a9] rounded-[18px] md:rounded-[18px] px-6 md:px-10 py-3 md:py-4 shadow-lg hover:shadow-xl hover:bg-[#e05a9c] transition-all active:scale-95"
+              onClick={onStart}
+              className="bg-white rounded-[18px] md:rounded-[19px] px-8 md:px-12 py-3 md:py-4 shadow-lg hover:shadow-xl transition-shadow active:scale-95"
             >
               <span
-                className="text-white text-base md:text-[18px] font-normal whitespace-nowrap"
-                style={{ fontFamily: "'Nashira Free', 'Comic Sans MS', cursive" }}
+                className="text-base md:text-[20px] font-normal whitespace-nowrap"
+                style={{ fontFamily: "'Nashira Free', 'Comic Sans MS', cursive", color: "#2B54A4" }}
               >
-                Turn on speedrunner camera
+                Start the Timer
               </span>
             </button>
-          )}
+
+            {!isCameraEnabled && (
+              <button
+                onClick={enableCamera}
+                className="bg-[#eb69a9] rounded-[18px] md:rounded-[18px] px-6 md:px-10 py-3 md:py-4 shadow-lg hover:shadow-xl hover:bg-[#e05a9c] transition-all active:scale-95"
+              >
+                <span
+                  className="text-white text-base md:text-[18px] font-normal whitespace-nowrap"
+                  style={{ fontFamily: "'Nashira Free', 'Comic Sans MS', cursive" }}
+                >
+                  Turn on speedrunner camera
+                </span>
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
