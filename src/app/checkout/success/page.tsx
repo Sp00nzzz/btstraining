@@ -88,32 +88,32 @@ export default function SuccessPage() {
                         </div>
                     )}
 
-                    {/* Publish Button */}
-                    {duration > 0 && !submittedUsername && (
+                    {/* Action Buttons */}
+                    <div className="flex flex-col sm:flex-row gap-4 items-center">
+                        {duration > 0 && !submittedUsername && (
+                            <button
+                                onClick={() => setIsDialogOpen(true)}
+                                className="px-8 py-4 bg-[#1f8c2e] hover:bg-[#177023] text-white font-bold text-lg rounded-[2px] shadow-md transition-all hover:scale-105 animate-in fade-in duration-500"
+                            >
+                                Publish to Leaderboard
+                            </button>
+                        )}
                         <button
-                            onClick={() => setIsDialogOpen(true)}
-                            className="px-8 py-4 bg-[#1f8c2e] hover:bg-[#177023] text-white font-bold text-lg rounded-lg shadow-md transition-all hover:scale-105 animate-in fade-in duration-500"
+                            onClick={() => {
+                                resetTimer();
+                                router.push("/");
+                            }}
+                            className="px-8 py-4 bg-[#026cdf] hover:bg-[#0256b1] text-white font-bold text-lg rounded-[2px] shadow-md transition-all hover:scale-105"
                         >
-                            Publish to Leaderboard
+                            try to get a better time
                         </button>
-                    )}
+                    </div>
 
                     {submittedUsername && (
                         <p className="text-[#1f8c2e] font-bold animate-in fade-in duration-300">
                             Score published as &quot;{submittedUsername}&quot;!
                         </p>
                     )}
-
-                    {/* Action Button */}
-                    <button
-                        onClick={() => {
-                            resetTimer();
-                            router.push("/");
-                        }}
-                        className="mt-4 px-8 py-4 bg-[#026cdf] hover:bg-[#0256b1] text-white font-bold text-lg rounded-[2px] shadow-md transition-all hover:scale-105"
-                    >
-                        try to get a better time
-                    </button>
                 </div>
 
                 {/* Right Column: Leaderboard */}

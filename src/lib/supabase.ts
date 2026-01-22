@@ -27,12 +27,17 @@ export async function submitScore(username: string, timeMs: number): Promise<Lea
   return data;
 }
 
-export async function getLeaderboard(limit = 10): Promise<LeaderboardEntry[]> {
-  const { data, error } = await supabase
+export async function getLeaderboard(limit?: number): Promise<LeaderboardEntry[]> {
+  let query = supabase
     .from("leaderboard")
     .select("*")
-    .order("time_ms", { ascending: true })
-    .limit(limit);
+    .order("time_ms", { ascending: true });
+
+  if (limit) {
+    query = query.limit(limit);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     console.error("Error fetching leaderboard:", error);

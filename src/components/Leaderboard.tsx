@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getLeaderboard, type LeaderboardEntry } from "@/lib/supabase";
 
 function formatTime(ms: number) {
@@ -13,16 +13,47 @@ function formatTime(ms: number) {
 export default function Leaderboard({ highlightUsername }: { highlightUsername?: string }) {
   const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
   const [loading, setLoading] = useState(true);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     async function fetchLeaderboard() {
       setLoading(true);
-      const data = await getLeaderboard(10);
+      const data = await getLeaderboard();
       setEntries(data);
       setLoading(false);
     }
     fetchLeaderboard();
   }, []);
+
+  // Auto-scroll effect
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container || loading || entries.length <= 5 || isPaused) return;
+
+    const scrollSpeed = 0.5; // pixels per frame
+    let animationId: number;
+
+    const scroll = () => {
+      if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+        // Reset to top when reaching bottom
+        container.scrollTop = 0;
+      } else {
+        container.scrollTop += scrollSpeed;
+      }
+      animationId = requestAnimationFrame(scroll);
+    };
+
+    // Start scrolling after a short delay
+    const timeout = setTimeout(() => {
+      animationId = requestAnimationFrame(scroll);
+    }, 2000);
+
+    return () => {
+      clearTimeout(timeout);
+      cancelAnimationFrame(animationId);
+    };
+  }, [loading, entries.length, isPaused]);
 
   if (loading) {
     return (
@@ -49,7 +80,13 @@ export default function Leaderboard({ highlightUsername }: { highlightUsername?:
   return (
     <div className="w-full max-w-md mx-auto">
       <h3 className="text-xl font-bold text-gray-700 mb-4 text-center">Leaderboard</h3>
-      <div className="space-y-2">
+      <div
+        ref={scrollContainerRef}
+        className="space-y-2 max-h-[320px] md:max-h-[calc(100vh-100px)] overflow-y-auto scrollbar-hide"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        style={{ scrollBehavior: 'auto' }}
+      >
         {entries.map((entry, index) => {
           const isHighlighted = highlightUsername && entry.username === highlightUsername;
           const rankColors = [
@@ -84,6 +121,9 @@ export default function Leaderboard({ highlightUsername }: { highlightUsername?:
           );
         })}
       </div>
+      {entries.length > 5 && (
+        <p className="text-xs text-gray-400 text-center mt-2">Hover to pause scrolling</p>
+      )}
     </div>
   );
 }
