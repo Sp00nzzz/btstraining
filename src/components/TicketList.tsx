@@ -185,7 +185,7 @@ export default function TicketList({
                                         className="flex gap-4 p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer group animate-in fade-in slide-in-from-bottom-2 duration-300"
                                     >
                                         {/* Mini Map Thumbnail */}
-                                        <div className="w-14 h-14 shrink-0 rounded overflow-hidden bg-gray-100 flex items-center justify-center">
+                                        <div className="w-14 h-14 shrink-0 rounded overflow-hidden bg-gray-100 flex items-center justify-center relative">
                                             <img
                                                 src="/map.svg"
                                                 alt="Section"

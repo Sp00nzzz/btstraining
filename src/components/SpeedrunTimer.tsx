@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { useTimerStore } from "@/store/useTimerStore";
 
 export default function SpeedrunTimer() {
     const { startTime, stopTime, isRunning } = useTimerStore();
+    const pathname = usePathname();
     const [displayTime, setDisplayTime] = useState("0:00.00");
     const requestRef = useRef<number | null>(null);
 
@@ -39,6 +41,9 @@ export default function SpeedrunTimer() {
             if (requestRef.current) cancelAnimationFrame(requestRef.current);
         };
     }, [isRunning, startTime, stopTime]);
+
+    // Hide on success page (time is shown prominently there)
+    if (pathname === "/checkout/success") return null;
 
     // If timer hasn't started and no previous result, don't show or show 0:00
     if (!startTime && !isRunning) return null;

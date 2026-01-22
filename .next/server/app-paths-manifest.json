@@ -1,8 +1,8 @@
 {
   "/page": "app/page.js",
-  "/queue/page": "app/queue/page.js",
-  "/home/page": "app/home/page.js",
   "/event/[eventId]/seats/page": "app/event/[eventId]/seats/page.js",
+  "/home/page": "app/home/page.js",
+  "/queue/page": "app/queue/page.js",
   "/checkout/page": "app/checkout/page.js",
   "/checkout/success/page": "app/checkout/success/page.js"
 }
