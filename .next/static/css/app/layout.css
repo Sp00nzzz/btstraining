@@ -930,6 +930,12 @@ video {
 .mt-\[-40px\] {
   margin-top: -40px;
 }
+.-mr-8 {
+  margin-right: -2rem;
+}
+.-mr-16 {
+  margin-right: -4rem;
+}
 .line-clamp-2 {
   overflow: hidden;
   display: -webkit-box;
@@ -1113,6 +1119,9 @@ video {
 .h-60 {
   height: 15rem;
 }
+.h-\[140px\] {
+  height: 140px;
+}
 .max-h-\[320px\] {
   max-height: 320px;
 }
@@ -1257,6 +1266,15 @@ video {
 }
 .w-full {
   width: 100%;
+}
+.w-\[400px\] {
+  width: 400px;
+}
+.w-\[500px\] {
+  width: 500px;
+}
+.w-\[350px\] {
+  width: 350px;
 }
 .min-w-0 {
   min-width: 0px;
@@ -1838,6 +1856,11 @@ video {
   --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
+.from-\[\#020202\] {
+  --tw-gradient-from: #020202 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(2 2 2 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
 .via-transparent {
   --tw-gradient-to: rgb(0 0 0 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), transparent var(--tw-gradient-via-position), var(--tw-gradient-to);
@@ -1851,8 +1874,17 @@ video {
 .bg-cover {
   background-size: cover;
 }
+.bg-contain {
+  background-size: contain;
+}
 .bg-center {
   background-position: center;
+}
+.bg-top {
+  background-position: top;
+}
+.bg-no-repeat {
+  background-repeat: no-repeat;
 }
 .object-contain {
   -o-object-fit: contain;
@@ -1861,6 +1893,10 @@ video {
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
+}
+.object-top {
+  -o-object-position: top;
+     object-position: top;
 }
 .p-0 {
   padding: 0px;

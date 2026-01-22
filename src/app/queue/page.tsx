@@ -65,12 +65,13 @@ export default function QueuePage() {
                         </div>
 
                         {/* Artist Image Fade */}
-                        <div className="hidden lg:block relative w-[250px] h-[60px] opacity-40 shrink-0">
+                        <div className="hidden lg:block relative w-[350px] h-[90px] opacity-40 shrink-0 -mr-16">
                             <div
-                                className="absolute inset-0 bg-cover bg-center rounded"
+                                className="absolute inset-0 bg-contain bg-center bg-no-repeat rounded"
                                 style={{ backgroundImage: 'url("/BTS.jpg")' }}
                             />
                             <div className="absolute inset-0 bg-gradient-to-l from-transparent to-[#020202]" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#020202] to-transparent" />
                         </div>
                     </div>
 
