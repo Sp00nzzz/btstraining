@@ -1,6 +1,8 @@
 {
-  "/queue/page": "app/queue/page.js",
   "/event/[eventId]/seats/page": "app/event/[eventId]/seats/page.js",
   "/page": "app/page.js",
-  "/home/page": "app/home/page.js"
+  "/checkout/success/page": "app/checkout/success/page.js",
+  "/queue/page": "app/queue/page.js",
+  "/home/page": "app/home/page.js",
+  "/checkout/page": "app/checkout/page.js"
 }

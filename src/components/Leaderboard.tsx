@@ -15,6 +15,8 @@ export default function Leaderboard({ highlightUsername }: { highlightUsername?:
   const [loading, setLoading] = useState(true);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
+  const userScrolledRef = useRef(false);
+  const userScrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     async function fetchLeaderboard() {
@@ -26,6 +28,28 @@ export default function Leaderboard({ highlightUsername }: { highlightUsername?:
     fetchLeaderboard();
   }, []);
 
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (userScrollTimeoutRef.current) {
+        clearTimeout(userScrollTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  // Handle user scroll detection
+  const handleUserScroll = () => {
+    userScrolledRef.current = true;
+    // Clear any existing timeout
+    if (userScrollTimeoutRef.current) {
+      clearTimeout(userScrollTimeoutRef.current);
+    }
+    // Reset the flag after user stops scrolling for 3 seconds
+    userScrollTimeoutRef.current = setTimeout(() => {
+      userScrolledRef.current = false;
+    }, 3000);
+  };
+
   // Auto-scroll effect
   useEffect(() => {
     const container = scrollContainerRef.current;
@@ -36,9 +60,11 @@ export default function Leaderboard({ highlightUsername }: { highlightUsername?:
 
     const scroll = () => {
       if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
-        // Reset to top when reaching bottom
-        container.scrollTop = 0;
-      } else {
+        // Only reset to top if user hasn't manually scrolled
+        if (!userScrolledRef.current) {
+          container.scrollTop = 0;
+        }
+      } else if (!userScrolledRef.current) {
         container.scrollTop += scrollSpeed;
       }
       animationId = requestAnimationFrame(scroll);
@@ -85,6 +111,8 @@ export default function Leaderboard({ highlightUsername }: { highlightUsername?:
         className="space-y-2 max-h-[320px] md:max-h-[calc(100vh-100px)] overflow-y-auto scrollbar-hide"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
+        onWheel={handleUserScroll}
+        onTouchMove={handleUserScroll}
         style={{ scrollBehavior: 'auto' }}
       >
         {entries.map((entry, index) => {

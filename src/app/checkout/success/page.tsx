@@ -72,11 +72,11 @@ export default function SuccessPage() {
                     {/* Conditional Content */}
                     {isGoodTime ? (
                         <div className="space-y-6 flex flex-col items-center animate-in fade-in zoom-in duration-500">
-                            <h2 className="text-4xl font-black italic tracking-tighter text-[#1f8c2e]">YOU ARE PREPPED SOLDIER</h2>
+                            <h2 className="text-4xl font-black italic tracking-tighter text-[#6B3FA0]">YOU ARE PREPPED ARMY</h2>
                             <div className="relative w-80 h-80">
                                 <Image
-                                    src="/soldier.webp"
-                                    alt="Soldier"
+                                    src="/jungkook.jpeg"
+                                    alt="Jungkook"
                                     fill
                                     className="object-contain"
                                 />
