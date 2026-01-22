@@ -52,6 +52,12 @@ const SECTIONS: SectionData[] = [
     { id: "S128", d: "M396 720 h40 v90 h-40 z", label: "SOUTH 128", labelX: 415, labelY: 760 },
     { id: "S131", d: "M522 720 h40 v90 h-40 z", label: "SOUTH 131", labelX: 542, labelY: 760 },
     { id: "S132", d: "M564 720 h40 v90 h-40 z", label: "SOUTH 132", labelX: 584, labelY: 760 },
+
+    // WC (Wheelchair Accessible) Sections
+    { id: "WC107", d: "M292 250 h30 v90 h-30 z", label: "107 WC", labelX: 307, labelY: 295 },
+    { id: "WC102", d: "M292 575 h30 v125 h-30 z", label: "102 WC", labelX: 307, labelY: 637 },
+    { id: "WC119", d: "M678 250 h30 v90 h-30 z", label: "119 WC", labelX: 693, labelY: 295 },
+    { id: "WC124", d: "M678 575 h30 v125 h-30 z", label: "124 WC", labelX: 693, labelY: 637 },
 ];
 
 // Helper: Parse SVG path 'd' to polygon vertices (Simplified for this dataset)
@@ -126,14 +132,32 @@ export default function InteractiveSeatMap({
         setSelectedSection(section);
         if (onSectionSelect) onSectionSelect(section.id);
 
-        // Center on the section's centroid
-        let targetX = (Number(section.labelX) / 1000) * 100;
+        // Calculate the actual centroid from the path
+        const polygon = parsePathToPolygon(section.d);
+        let centroidX = Number(section.labelX);
+        let centroidY = Number(section.labelY);
 
-        // Only move camera left for East sections
-        if (section.id.startsWith("E")) {
-            targetX -= 7;
+        if (polygon.length >= 3) {
+            // Calculate actual centroid of the polygon
+            const sumX = polygon.reduce((acc, p) => acc + p.x, 0);
+            const sumY = polygon.reduce((acc, p) => acc + p.y, 0);
+            centroidX = sumX / polygon.length;
+            centroidY = sumY / polygon.length;
         }
-        const targetY = (Number(section.labelY) / 850) * 100;
+
+        // Convert to percentage of viewBox
+        let targetX = (centroidX / 1000) * 100;
+        let targetY = (centroidY / 850) * 100;
+
+        // Shift sections toward center of viewport
+        // East sections (right side) - shift view toward center
+        if (section.id.startsWith("E") || section.id === "WC119" || section.id === "WC124") {
+            targetX -= 8;
+        }
+        // West sections (left side) - shift view toward center
+        if (section.id.startsWith("W") || section.id === "WC107" || section.id === "WC102") {
+            targetX += 8;
+        }
 
         setView({
             x: targetX,
@@ -217,7 +241,7 @@ export default function InteractiveSeatMap({
                         isPointInPolygon({ x, y: y - padding }, polygon)
                     ) {
                         // Assign a stable mock price based on section and position
-                        const basePrice = selectedSection.id.startsWith('W') ? 500 : selectedSection.id.startsWith('E') ? 450 : 350;
+                        const basePrice = selectedSection.id.startsWith('WC') ? 400 : selectedSection.id.startsWith('W') ? 500 : selectedSection.id.startsWith('E') ? 450 : 350;
                         const seatPrice = basePrice + (y / 10) + (x / 20);
 
                         // Deterministic availability check
@@ -414,21 +438,18 @@ export default function InteractiveSeatMap({
                         <>
                             {/* Stage - Black shape in center */}
                             <g className="pointer-events-none">
-                                {/* Main circle */}
-                                <circle cx="500" cy="450" r="70" fill="#1f262d" />
-
-                                {/* Cross extensions - lines from circle edge outward */}
+                                {/* Cross extensions - lines from circle center outward */}
                                 {/* Top left */}
-                                <line x1="451" y1="401" x2="380" y2="330" stroke="#1f262d" strokeWidth="20" strokeLinecap="round" />
-
+                                <line x1="500" y1="450" x2="380" y2="330" stroke="#1f262d" strokeWidth="20" />
                                 {/* Top right */}
-                                <line x1="549" y1="401" x2="620" y2="330" stroke="#1f262d" strokeWidth="20" strokeLinecap="round" />
-
+                                <line x1="500" y1="450" x2="620" y2="330" stroke="#1f262d" strokeWidth="20" />
                                 {/* Bottom left */}
-                                <line x1="451" y1="499" x2="380" y2="570" stroke="#1f262d" strokeWidth="20" strokeLinecap="round" />
-
+                                <line x1="500" y1="450" x2="380" y2="570" stroke="#1f262d" strokeWidth="20" />
                                 {/* Bottom right */}
-                                <line x1="549" y1="499" x2="620" y2="570" stroke="#1f262d" strokeWidth="20" strokeLinecap="round" />
+                                <line x1="500" y1="450" x2="620" y2="570" stroke="#1f262d" strokeWidth="20" />
+
+                                {/* Main circle - drawn on top */}
+                                <circle cx="500" cy="450" r="70" fill="#1f262d" />
 
                                 {/* STAGE text */}
                                 <text
@@ -444,19 +465,6 @@ export default function InteractiveSeatMap({
                                     STAGE
                                 </text>
                             </g>
-
-                            {/* WC Sections - Dark Grey strips */}
-                            <rect x="292" y="250" width="30" height="90" fill="#026cdf" stroke="white" />
-                            <text x="307" y="295" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">107 WC</text>
-
-                            <rect x="292" y="575" width="30" height="125" fill="#026cdf" stroke="white" />
-                            <text x="307" y="630" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">102 WC</text>
-
-                            <rect x="678" y="250" width="30" height="90" fill="#026cdf" stroke="white" />
-                            <text x="693" y="295" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">119 WC</text>
-
-                            <rect x="678" y="575" width="30" height="125" fill="#026cdf" stroke="white" />
-                            <text x="693" y="630" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">124 WC</text>
 
                         </>
                     )}
