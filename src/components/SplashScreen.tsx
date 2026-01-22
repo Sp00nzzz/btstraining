@@ -275,11 +275,13 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
             <div className="bg-[#faed3d] rounded-[50px] md:rounded-[90px] px-6 md:px-14 py-6 md:py-10">
               {/* Border */}
               <div className="border-[4px] md:border-[7px] border-[#474545] rounded-[38px] md:rounded-[70px] px-5 md:px-10 py-5 md:py-8">
-                <h1
-                  className="text-[#474545] text-center text-xl md:text-[50px] leading-tight tracking-tighter"
-                  style={{ fontFamily: "'Nashira Free', 'Comic Sans MS', cursive" }}
-                >
-                  CONCERT TICKET<br />TRAINING
+                <h1 className="text-[#474545] text-center text-xl md:text-[50px] leading-tight tracking-tighter">
+                  <span className="md:hidden" style={{ fontFamily: "Arial, sans-serif" }}>
+                    CONCERT TICKET<br />TRAINING
+                  </span>
+                  <span className="hidden md:inline" style={{ fontFamily: "'Nashira Free', 'Comic Sans MS', cursive" }}>
+                    CONCERT TICKET<br />TRAINING
+                  </span>
                 </h1>
               </div>
             </div>
@@ -291,11 +293,13 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
               onClick={onStart}
               className="bg-white rounded-[18px] md:rounded-[19px] px-8 md:px-12 py-3 md:py-4 shadow-lg hover:shadow-xl transition-shadow active:scale-95"
             >
-              <span
-                className="text-base md:text-[20px] font-normal whitespace-nowrap"
-                style={{ fontFamily: "'Nashira Free', 'Comic Sans MS', cursive", color: "#2B54A4" }}
-              >
-                Start the Timer
+              <span className="text-base md:text-[20px] font-normal whitespace-nowrap text-[#2B54A4]">
+                <span className="md:hidden" style={{ fontFamily: "Arial, sans-serif" }}>
+                  Start the Timer
+                </span>
+                <span className="hidden md:inline" style={{ fontFamily: "'Nashira Free', 'Comic Sans MS', cursive" }}>
+                  Start the Timer
+                </span>
               </span>
             </button>
 
@@ -304,11 +308,13 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
                 onClick={enableCamera}
                 className="bg-[#eb69a9] rounded-[18px] md:rounded-[18px] px-6 md:px-10 py-3 md:py-4 shadow-lg hover:shadow-xl hover:bg-[#e05a9c] transition-all active:scale-95"
               >
-                <span
-                  className="text-white text-base md:text-[18px] font-normal whitespace-nowrap"
-                  style={{ fontFamily: "'Nashira Free', 'Comic Sans MS', cursive" }}
-                >
-                  Turn on speedrunner camera
+                <span className="text-white text-base md:text-[18px] font-normal whitespace-nowrap">
+                  <span className="md:hidden" style={{ fontFamily: "Arial, sans-serif" }}>
+                    Turn on speedrunner camera
+                  </span>
+                  <span className="hidden md:inline" style={{ fontFamily: "'Nashira Free', 'Comic Sans MS', cursive" }}>
+                    Turn on speedrunner camera
+                  </span>
                 </span>
               </button>
             )}
