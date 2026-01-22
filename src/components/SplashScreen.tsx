@@ -293,7 +293,7 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
               onClick={onStart}
               className="bg-white rounded-[18px] md:rounded-[19px] px-8 md:px-12 py-3 md:py-4 shadow-lg hover:shadow-xl transition-shadow active:scale-95"
             >
-              <span className="text-base md:text-[20px] font-normal whitespace-nowrap text-[#2B54A4]">
+              <span className="text-base md:text-[20px] font-normal whitespace-nowrap" style={{ color: '#2B54A4' }}>
                 <span className="md:hidden" style={{ fontFamily: "Arial, sans-serif" }}>
                   Start the Timer
                 </span>
