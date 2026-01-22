@@ -11,11 +11,6 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/event/[eventId]/seats/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/event/[eventId]/seats/page.js"
-    ],
     "/home/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -26,15 +21,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/queue/page.js"
     ],
-    "/checkout/page": [
+    "/event/[eventId]/seats/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/checkout/page.js"
-    ],
-    "/checkout/success/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/checkout/success/page.js"
+      "static/chunks/app/event/[eventId]/seats/page.js"
     ]
   }
 }

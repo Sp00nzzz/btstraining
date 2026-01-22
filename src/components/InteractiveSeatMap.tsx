@@ -412,6 +412,39 @@ export default function InteractiveSeatMap({
                     {/* Stage & Decor */}
                     {!selectedSection && (
                         <>
+                            {/* Stage - Black shape in center */}
+                            <g className="pointer-events-none">
+                                {/* Main circle */}
+                                <circle cx="500" cy="450" r="70" fill="#1f262d" />
+
+                                {/* Cross extensions - lines from circle edge outward */}
+                                {/* Top left */}
+                                <line x1="451" y1="401" x2="380" y2="330" stroke="#1f262d" strokeWidth="20" strokeLinecap="round" />
+
+                                {/* Top right */}
+                                <line x1="549" y1="401" x2="620" y2="330" stroke="#1f262d" strokeWidth="20" strokeLinecap="round" />
+
+                                {/* Bottom left */}
+                                <line x1="451" y1="499" x2="380" y2="570" stroke="#1f262d" strokeWidth="20" strokeLinecap="round" />
+
+                                {/* Bottom right */}
+                                <line x1="549" y1="499" x2="620" y2="570" stroke="#1f262d" strokeWidth="20" strokeLinecap="round" />
+
+                                {/* STAGE text */}
+                                <text
+                                    x="500"
+                                    y="455"
+                                    textAnchor="middle"
+                                    dominantBaseline="middle"
+                                    fill="white"
+                                    fontSize="28"
+                                    fontWeight="bold"
+                                    style={{ fontFamily: 'Arial, sans-serif' }}
+                                >
+                                    STAGE
+                                </text>
+                            </g>
+
                             {/* WC Sections - Dark Grey strips */}
                             <rect x="292" y="250" width="30" height="90" fill="#026cdf" stroke="white" />
                             <text x="307" y="295" textAnchor="middle" fill="white" fontSize="7" fontWeight="bold">107 WC</text>

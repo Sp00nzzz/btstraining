@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useFacecamStore } from "@/components/Facecam";
+import LeaderboardBanner from "@/components/LeaderboardBanner";
 
 // Image assets from public/splash folder
 const imgBackground = "/splash/background.png";
@@ -48,6 +49,11 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
           alt=""
           className="w-full h-full object-cover"
         />
+      </div>
+
+      {/* Leaderboard Banner - Top */}
+      <div className="absolute top-0 left-0 right-0 z-50">
+        <LeaderboardBanner />
       </div>
 
       {/* Decorative elements - Left side */}
