@@ -96,6 +96,90 @@ const isPointInPolygon = (pt: { x: number, y: number }, vs: { x: number, y: numb
     return inside;
 };
 
+// --- Camera System ---
+// ViewBox dimensions (constants for the SVG coordinate system)
+const VIEWBOX_WIDTH = 1000;
+const VIEWBOX_HEIGHT = 850;
+
+type BoundingBox = {
+    minX: number;
+    maxX: number;
+    minY: number;
+    maxY: number;
+    width: number;
+    height: number;
+    centerX: number;
+    centerY: number;
+};
+
+// Calculate precise bounding box from polygon vertices
+const getPolygonBounds = (polygon: { x: number; y: number }[]): BoundingBox | null => {
+    if (polygon.length === 0) return null;
+
+    let minX = Infinity, maxX = -Infinity;
+    let minY = Infinity, maxY = -Infinity;
+
+    for (const p of polygon) {
+        minX = Math.min(minX, p.x);
+        maxX = Math.max(maxX, p.x);
+        minY = Math.min(minY, p.y);
+        maxY = Math.max(maxY, p.y);
+    }
+
+    return {
+        minX,
+        maxX,
+        minY,
+        maxY,
+        width: maxX - minX,
+        height: maxY - minY,
+        centerX: (minX + maxX) / 2,
+        centerY: (minY + maxY) / 2,
+    };
+};
+
+// Calculate optimal camera position and zoom for a section
+// This ensures the section is perfectly centered with appropriate framing
+const calculateCameraForSection = (section: SectionData): { x: number; y: number; scale: number } => {
+    const polygon = parsePathToPolygon(section.d);
+
+    if (polygon.length < 3) {
+        // Fallback to label position if polygon parsing fails
+        return {
+            x: (Number(section.labelX) / VIEWBOX_WIDTH) * 100,
+            y: (Number(section.labelY) / VIEWBOX_HEIGHT) * 100,
+            scale: 10,
+        };
+    }
+
+    const bounds = getPolygonBounds(polygon);
+    if (!bounds) {
+        return {
+            x: 50,
+            y: 50,
+            scale: 10,
+        };
+    }
+
+    // Calculate optimal scale to fit section with comfortable padding
+    // Target: section fills ~50-60% of visible viewport (20-25% padding on each side)
+    const paddingFactor = 0.55; // Section fills 55% of viewport
+    const scaleX = (VIEWBOX_WIDTH * paddingFactor) / bounds.width;
+    const scaleY = (VIEWBOX_HEIGHT * paddingFactor) / bounds.height;
+
+    // Use the smaller scale to ensure section fits in both dimensions
+    // Clamp to reasonable zoom range (min 5x for context, max 14x for detail)
+    const optimalScale = Math.min(scaleX, scaleY);
+    const scale = Math.max(5, Math.min(optimalScale, 14));
+
+    // Calculate focus point using bounding box center (NOT polygon centroid)
+    // This ensures perfect centering for all shapes including trapezoids
+    const targetX = (bounds.centerX / VIEWBOX_WIDTH) * 100;
+    const targetY = (bounds.centerY / VIEWBOX_HEIGHT) * 100;
+
+    return { x: targetX, y: targetY, scale };
+};
+
 // Deterministic random generator for seat status
 const seededRandom = (seed: number) => {
     const x = Math.sin(seed) * 10000;
@@ -132,38 +216,10 @@ export default function InteractiveSeatMap({
         setSelectedSection(section);
         if (onSectionSelect) onSectionSelect(section.id);
 
-        // Calculate the actual centroid from the path
-        const polygon = parsePathToPolygon(section.d);
-        let centroidX = Number(section.labelX);
-        let centroidY = Number(section.labelY);
-
-        if (polygon.length >= 3) {
-            // Calculate actual centroid of the polygon
-            const sumX = polygon.reduce((acc, p) => acc + p.x, 0);
-            const sumY = polygon.reduce((acc, p) => acc + p.y, 0);
-            centroidX = sumX / polygon.length;
-            centroidY = sumY / polygon.length;
-        }
-
-        // Convert to percentage of viewBox
-        let targetX = (centroidX / 1000) * 100;
-        let targetY = (centroidY / 850) * 100;
-
-        // Shift sections toward center of viewport
-        // East sections (right side) - shift view toward center
-        if (section.id.startsWith("E") || section.id === "WC119" || section.id === "WC124") {
-            targetX -= 8;
-        }
-        // West sections (left side) - shift view toward center
-        if (section.id.startsWith("W") || section.id === "WC107" || section.id === "WC102") {
-            targetX += 8;
-        }
-
-        setView({
-            x: targetX,
-            y: targetY,
-            scale: 10 // Zoom in, but keep context visible
-        });
+        // Use the camera calculation system for perfect positioning
+        // This computes optimal zoom and bounding-box-centered focus point
+        const camera = calculateCameraForSection(section);
+        setView(camera);
     };
 
     const handleReset = () => {
@@ -212,12 +268,16 @@ export default function InteractiveSeatMap({
         const polygon = parsePathToPolygon(selectedSection.d);
         if (polygon.length < 3) return null;
 
+        // Use bounding box center for consistent seat generation
+        const bounds = getPolygonBounds(polygon);
+        if (!bounds) return null;
+
         const cw = 150;
         const ch = 150;
         const gap = 3.5;
         const radius = 1.2;
-        const cx = Number(selectedSection.labelX);
-        const cy = Number(selectedSection.labelY);
+        const cx = bounds.centerX;
+        const cy = bounds.centerY;
 
         const currentAvailability = sectionAvailability[selectedSection.id] ?? 1.0;
 
@@ -323,10 +383,10 @@ export default function InteractiveSeatMap({
                 >
                     {selectedSection ? <ChevronLeft className="w-5 h-5 text-[#026cdf]" /> : <Home className="w-5 h-5" />}
                 </button>
-                <button className="p-2 hover:bg-gray-50 text-[#026cdf] border-b border-gray-100 transition-colors" onClick={() => setView(s => ({ ...s, scale: Math.min(s.scale + 0.5, 8) }))}>
+                <button className="p-2 hover:bg-gray-50 text-[#026cdf] border-b border-gray-100 transition-colors" onClick={() => setView(s => ({ ...s, scale: Math.min(s.scale + 1, 14) }))}>
                     <Plus className="w-5 h-5" />
                 </button>
-                <button className="p-2 hover:bg-gray-50 text-gray-600 transition-colors" onClick={() => setView(s => ({ ...s, scale: Math.max(s.scale - 0.5, 1) }))}>
+                <button className="p-2 hover:bg-gray-50 text-gray-600 transition-colors" onClick={() => setView(s => ({ ...s, scale: Math.max(s.scale - 1, 1) }))}>
                     <Minus className="w-5 h-5" />
                 </button>
             </div>
