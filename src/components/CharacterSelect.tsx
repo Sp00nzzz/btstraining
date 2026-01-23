@@ -158,7 +158,7 @@ export default function CharacterSelect({
       <img
         src="/characters/bg.png"
         alt=""
-        className="absolute inset-0 w-full h-full object-cover object-top pointer-events-none"
+        className="absolute inset-0 w-full h-full object-contain md:object-cover object-center md:object-top pointer-events-none"
         draggable={false}
       />
 
@@ -177,7 +177,7 @@ export default function CharacterSelect({
             <img
               src={`/characters/${num}.png`}
               alt={CHARACTER_NAMES[index]}
-              className="absolute inset-0 w-full h-full object-cover object-top transition-all duration-200"
+              className="absolute inset-0 w-full h-full object-contain md:object-cover object-center md:object-top transition-all duration-200"
               style={{
                 // Dim non-selected characters when one is selected
                 filter: hasSelection && !isSelected
@@ -194,7 +194,7 @@ export default function CharacterSelect({
               <img
                 src={`/characters/${num}.png`}
                 alt=""
-                className="absolute inset-0 w-full h-full object-cover object-top"
+                className="absolute inset-0 w-full h-full object-contain md:object-cover object-center md:object-top"
                 style={{
                   filter: "brightness(1.2) sepia(1) saturate(4) hue-rotate(260deg)",
                   mixBlendMode: "overlay",
@@ -209,7 +209,7 @@ export default function CharacterSelect({
               <img
                 src={`/characters/${num}.png`}
                 alt=""
-                className="absolute inset-0 w-full h-full object-cover object-top"
+                className="absolute inset-0 w-full h-full object-contain md:object-cover object-center md:object-top"
                 style={{
                   filter: "brightness(1.5) blur(10px) sepia(1) saturate(3) hue-rotate(260deg)",
                   mixBlendMode: "screen",
