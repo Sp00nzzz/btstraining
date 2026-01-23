@@ -163,6 +163,11 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
           </div>
 
         </div>
+
+        {/* Attribution */}
+        <div className="flex justify-center w-full mt-4 md:mt-2">
+          <p className="text-gray-400 text-xs md:text-sm">@immike_wing</p>
+        </div>
       </footer>
     </div>
   );
