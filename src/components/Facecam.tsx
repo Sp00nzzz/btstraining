@@ -19,6 +19,7 @@ interface FacecamStore {
     selectedCharacter: number | null;
     enableCamera: () => void;
     disableCamera: () => void;
+    toggleCamera: () => void;
     setSelectedCharacter: (character: number | null) => void;
 }
 
@@ -27,6 +28,7 @@ export const useFacecamStore = create<FacecamStore>((set) => ({
     selectedCharacter: null,
     enableCamera: () => set({ isCameraEnabled: true }),
     disableCamera: () => set({ isCameraEnabled: false }),
+    toggleCamera: () => set((state) => ({ isCameraEnabled: !state.isCameraEnabled })),
     setSelectedCharacter: (character) => set({ selectedCharacter: character }),
 }));
 
