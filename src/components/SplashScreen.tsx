@@ -46,17 +46,15 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
     <div className="fixed inset-0 z-[100] overflow-hidden bg-white">
       {/* Blue Header Bar */}
       <div className="absolute top-0 left-0 right-0 h-[70px] md:h-[100px] bg-[#0059e3] z-10">
-        {/* BTS Logo */}
-        <div className="absolute left-[200px] md:left-[350px] top-1/2 -translate-y-1/2 h-[50px] md:h-[70px] w-[32px] md:w-[36px]">
+        {/* BTS Logo + Text Container */}
+        <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex items-center gap-3 md:gap-4 h-[45px] md:h-[70px]">
+          {/* BTS Logo */}
           <img
             src={imgBTSLogo}
             alt="BTS"
-            className="h-full w-full object-contain"
+            className="h-full w-auto object-contain"
           />
-        </div>
-
-        {/* BTS TICKET TRAINER Text */}
-        <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 h-[45px] md:h-[70px] w-[450px] md:w-[650px]">
+          {/* BTS TICKET TRAINER Text */}
           <img
             src={imgTicketTrainerText}
             alt="BTS TICKET TRAINER"
