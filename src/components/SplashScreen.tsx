@@ -58,33 +58,39 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
   return (
     <div className="fixed inset-0 z-[100] overflow-hidden bg-white">
       {/* Blue Header Bar */}
-      <div className="absolute top-0 left-0 right-0 h-[40px] md:h-[95px] bg-[#0059e3] z-10">
-        {/* Centered Logo + Text Container */}
-        <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex items-center gap-2 md:gap-4">
-          {/* BTS Logo */}
-          <div className="h-[20px] md:h-[70px] w-[13px] md:w-[45px]">
-            <img
-              src={imgBTSLogo}
-              alt="BTS"
-              className="h-full w-full object-contain"
-            />
-          </div>
+      <div className="absolute top-0 left-0 right-0 z-10 flex flex-col">
+        {/* Main Blue Header */}
+        <div className="h-[40px] md:h-[95px] bg-[#0059e3] relative">
+          {/* Centered Logo + Text Container */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex items-center gap-2 md:gap-4">
+            {/* BTS Logo */}
+            <div className="h-[20px] md:h-[70px] w-[13px] md:w-[45px]">
+              <img
+                src={imgBTSLogo}
+                alt="BTS"
+                className="h-full w-full object-contain"
+              />
+            </div>
 
-          {/* BTS TICKET TRAINER Text */}
-          <div className="h-[25px] md:h-[60px] w-auto">
-            <img
-              src={imgTicketTrainerText}
-              alt="BTS TICKET TRAINER"
-              className="h-full w-auto object-contain mix-blend-plus-lighter"
-            />
+            {/* BTS TICKET TRAINER Text */}
+            <div className="h-[25px] md:h-[60px] w-auto">
+              <img
+                src={imgTicketTrainerText}
+                alt="BTS TICKET TRAINER"
+                className="h-full w-auto object-contain mix-blend-plus-lighter"
+              />
+            </div>
           </div>
         </div>
+
+        {/* Leaderboard Marquee Banner */}
+        <LeaderboardBanner />
       </div>
 
       {/* Main Content Area */}
-      <div className="absolute top-[40px] md:top-[95px] left-0 right-0 bottom-0 flex flex-col">
+      <div className="absolute top-[76px] md:top-[131px] left-0 right-0 bottom-0 flex flex-col">
         {/* Character Select - Takes remaining space, centered vertically on mobile */}
-        <div className="relative flex-1 overflow-hidden flex items-start md:items-center justify-center mb-[-100px] md:mb-0">
+        <div className="relative flex-1 overflow-hidden flex items-stretch md:items-center justify-center mb-[-100px] md:mb-0">
           <div className="w-full h-auto md:h-full md:-translate-y-[100px]">
             <CharacterSelect
               onSelect={handleCharacterSelect}
@@ -175,10 +181,6 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
         </div>
       </div>
 
-      {/* Leaderboard Banner - Top overlay */}
-      <div className="absolute top-0 left-0 right-0 z-50 hidden">
-        <LeaderboardBanner />
-      </div>
     </div>
   );
 }

@@ -224,7 +224,9 @@ export default function CharacterSelect({
 
       {/* Character name display */}
       {(selectedCharacter !== null || hoveredCharacter !== null) && (
-        <div className="absolute bottom-[120px] left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 md:px-6 py-1.5 md:py-2 rounded-full font-[var(--font-nunito)] text-base md:text-2xl font-bold pointer-events-none whitespace-nowrap">
+        <div
+          className="absolute bottom-[135px] left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 md:px-6 py-1.5 md:py-2 rounded-full font-[var(--font-nunito)] text-base md:text-2xl font-bold pointer-events-none whitespace-nowrap transition-all duration-200"
+        >
           {CHARACTER_NAMES[selectedCharacter ?? hoveredCharacter!]}
         </div>
       )}
