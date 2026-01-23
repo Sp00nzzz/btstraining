@@ -27,7 +27,9 @@ const config: Config = {
         soft: "0 8px 18px rgba(15, 23, 42, 0.12)"
       },
       fontFamily: {
-        sans: ["Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"]
+        sans: ["Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"],
+        pixelify: ["var(--font-pixelify-sans)", "monospace"],
+        nunito: ["var(--font-nunito)", "sans-serif"]
       }
     }
   },
