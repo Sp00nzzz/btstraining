@@ -6,8 +6,8 @@ import LeaderboardBanner from "@/components/LeaderboardBanner";
 
 // Image assets from public/splash folder
 const imgBTSGroup = "/splash/bts-group.png";
-const imgBTSLogo = "/splash/bts-logo-blue.png";
-const imgTicketTrainerText = "/splash/bts-ticket-trainer-text.png";
+const imgBTSLogo = "/splash2/bts-logo-white.png";
+const imgTicketTrainerText = "/splash2/header-text.png";
 
 interface SplashScreenProps {
   onStart: () => void;
@@ -45,9 +45,9 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
   return (
     <div className="fixed inset-0 z-[100] overflow-hidden bg-white">
       {/* Blue Header Bar */}
-      <div className="absolute top-0 left-0 right-0 h-[90px] md:h-[145px] bg-[#0059e3] z-10">
+      <div className="absolute top-0 left-0 right-0 h-[70px] md:h-[100px] bg-[#0059e3] z-10">
         {/* BTS Logo */}
-        <div className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 h-[50px] md:h-[100px] w-[32px] md:w-[65px]">
+        <div className="absolute left-[200px] md:left-[350px] top-1/2 -translate-y-1/2 h-[50px] md:h-[70px] w-[32px] md:w-[36px]">
           <img
             src={imgBTSLogo}
             alt="BTS"
@@ -56,54 +56,46 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
         </div>
 
         {/* BTS TICKET TRAINER Text */}
-        <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 h-[40px] md:h-[78px] w-auto">
+        <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 h-[45px] md:h-[70px] w-[450px] md:w-[650px]">
           <img
             src={imgTicketTrainerText}
             alt="BTS TICKET TRAINER"
-            className="h-full w-auto object-contain mix-blend-plus-lighter"
+            className="h-full w-auto object-contain"
           />
         </div>
       </div>
 
       {/* Main Content Area */}
-      <div className="absolute top-[90px] md:top-[145px] left-0 right-0 bottom-0 flex flex-col">
+      <div className="absolute top-[70px] md:top-[100px] left-0 right-0 bottom-0 flex flex-col">
         {/* BTS Group Photo */}
         <div className="relative flex-1 overflow-hidden">
           <img
             src={imgBTSGroup}
             alt="BTS Group"
-            className="w-full h-full object-cover object-top"
+            className="w-full h-full object-cover" style={{ objectPosition: 'center -120px' }}
           />
         </div>
 
         {/* Bottom Section with controls */}
-        <div className="relative bg-white px-4 md:px-6 py-4 md:py-6">
+        <div className="relative bg-white px-4 md:px-6 py-2 md:py-1">
           {/* Green Begin Training Button - Centered */}
-          <div className="flex justify-center mb-4 md:mb-0 md:absolute md:left-1/2 md:-translate-x-1/2 md:top-[-50px]">
+          <div className="flex flex-col items-center mb-4 md:mb-0 md:absolute md:left-1/2 md:-translate-x-1/2 md:top-[-50px]">
             <button
               onClick={onStart}
               className="bg-[#7cd446] border-[3px] border-[#499b14] rounded-[19px] px-12 md:px-20 py-4 md:py-6 shadow-[inset_0px_24px_18px_-8px_rgba(255,255,255,0.5)] hover:brightness-105 active:scale-95 transition-all"
             >
-              <span className="text-white text-xl md:text-[40px] font-bold tracking-[-1.5px] font-[var(--font-nunito)]">
+              <span
+                className="text-white text-xl md:text-[40px] font-bold tracking-[-1.5px] font-nunito"
+                style={{
+                  WebkitTextStroke: '4px #649037',
+                  paintOrder: 'stroke fill'
+                }}
+              >
                 Begin Training
               </span>
             </button>
-          </div>
-
-          {/* Three Column Layout for Bottom */}
-          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 md:gap-0">
-            {/* Left: Steps List */}
-            <div className="order-2 md:order-1">
-              <ol className="text-black text-base md:text-[24px] leading-relaxed list-decimal list-inside space-y-0 font-[var(--font-pixelify-sans)]">
-                <li>WAIT IN LINE</li>
-                <li>SELECT SEATS</li>
-                <li>CHECKOUT</li>
-                <li>WIN</li>
-              </ol>
-            </div>
-
-            {/* Center: Speedrunner Facecam Toggle */}
-            <div className="order-1 md:order-2 flex items-center gap-3 md:absolute md:left-1/2 md:-translate-x-1/2 md:bottom-6">
+            {/* Speedrunner Facecam Toggle */}
+            <div className="flex items-center gap-3 mt-3">
               <span className="text-black text-sm md:text-[20px] opacity-20">
                 speedrunner facecam
               </span>
@@ -121,13 +113,26 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
                 />
               </button>
             </div>
+          </div>
+
+          {/* Two Column Layout for Bottom */}
+          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-2 md:gap-0">
+            {/* Left: Steps List */}
+            <div className="order-2 md:order-1">
+              <ol className="text-black text-sm md:text-[18px] leading-relaxed list-decimal list-inside space-y-0 font-pixelify">
+                <li>WAIT IN LINE</li>
+                <li>SELECT SEATS</li>
+                <li>CHECKOUT</li>
+                <li>WIN</li>
+              </ol>
+            </div>
 
             {/* Right: Countdown Timer */}
-            <div className="order-3 text-right">
-              <p className="text-black text-xs md:text-[12px] font-bold mb-1">
+            <div className="order-3 text-center relative -top-[35px]">
+              <p className="text-black text-xs md:text-[12px] font-bold mb-1 font-inter">
                 Countdown till General Sale
               </p>
-              <div className="flex gap-4 md:gap-6 justify-end font-[var(--font-pixelify-sans)]">
+              <div className="flex gap-4 md:gap-6 justify-center font-pixelify">
                 <div className="text-center">
                   <p className="text-black text-2xl md:text-[32px]">{countdown.hours}</p>
                   <p className="text-black text-xs md:text-[18px]">hours</p>
