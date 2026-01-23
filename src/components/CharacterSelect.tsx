@@ -149,16 +149,16 @@ export default function CharacterSelect({
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-full overflow-hidden cursor-pointer"
+      className="relative w-max md:w-full h-full overflow-hidden cursor-pointer"
       onClick={handleClick}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Background image */}
+      {/* Background image - defines the width on mobile */}
       <img
         src="/characters/bg.png"
         alt=""
-        className="absolute inset-0 w-full h-full object-contain md:object-cover object-center md:object-top pointer-events-none"
+        className="relative md:absolute md:inset-0 h-full w-auto md:w-full md:object-cover object-left md:object-top pointer-events-none block flex-shrink-0"
         draggable={false}
       />
 
@@ -177,7 +177,7 @@ export default function CharacterSelect({
             <img
               src={`/characters/${num}.png`}
               alt={CHARACTER_NAMES[index]}
-              className="absolute inset-0 w-full h-full object-contain md:object-cover object-center md:object-top transition-all duration-200"
+              className="absolute inset-0 w-full h-full object-left md:object-cover md:object-top transition-all duration-200"
               style={{
                 // Dim non-selected characters when one is selected
                 filter: hasSelection && !isSelected
@@ -194,7 +194,7 @@ export default function CharacterSelect({
               <img
                 src={`/characters/${num}.png`}
                 alt=""
-                className="absolute inset-0 w-full h-full object-contain md:object-cover object-center md:object-top"
+                className="absolute inset-0 w-full h-full object-left md:object-cover md:object-top"
                 style={{
                   filter: "brightness(1.2) sepia(1) saturate(4) hue-rotate(260deg)",
                   mixBlendMode: "overlay",
@@ -209,7 +209,7 @@ export default function CharacterSelect({
               <img
                 src={`/characters/${num}.png`}
                 alt=""
-                className="absolute inset-0 w-full h-full object-contain md:object-cover object-center md:object-top"
+                className="absolute inset-0 w-full h-full object-left md:object-cover md:object-top"
                 style={{
                   filter: "brightness(1.5) blur(10px) sepia(1) saturate(3) hue-rotate(260deg)",
                   mixBlendMode: "screen",
@@ -224,7 +224,7 @@ export default function CharacterSelect({
 
       {/* Character name display */}
       {(selectedCharacter !== null || hoveredCharacter !== null) && (
-        <div className="absolute bottom-[120px] left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 md:px-6 py-1.5 md:py-2 rounded-none font-[var(--font-nunito)] text-base md:text-2xl font-bold pointer-events-none whitespace-nowrap">
+        <div className="fixed bottom-[50%] md:absolute md:bottom-[120px] left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 md:px-6 py-1.5 md:py-2 rounded-none font-[var(--font-nunito)] text-base md:text-2xl font-bold pointer-events-none whitespace-nowrap z-30">
           {CHARACTER_NAMES[selectedCharacter ?? hoveredCharacter!]}
         </div>
       )}
