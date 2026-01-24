@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { SlidersHorizontal, ChevronsUpDown, Info, X, ChevronDown, HelpCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
@@ -186,9 +187,11 @@ export default function TicketList({
                                     >
                                         {/* Mini Map Thumbnail */}
                                         <div className="w-14 h-14 shrink-0 rounded overflow-hidden bg-gray-100 flex items-center justify-center relative">
-                                            <img
+                                            <Image
                                                 src="/map.svg"
                                                 alt="Section"
+                                                width={56}
+                                                height={56}
                                                 className="w-full h-full object-contain opacity-60"
                                             />
                                             <div className="absolute w-2 h-2 bg-[#026cdf] rounded-full" />

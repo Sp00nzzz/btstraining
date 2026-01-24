@@ -42,7 +42,13 @@ export default function EventHeader() {
                     {/* Artist Image Thumbnail */}
                     <div className="w-[80px] h-[50px] relative rounded overflow-hidden shrink-0 hidden md:block">
                         <div className="absolute inset-0 bg-gray-600 animate-pulse" /> {/* Placeholder while loading or if image missing */}
-                        <img src="/BTS.jpg" className="absolute inset-0 w-full h-full object-cover" alt="Event" />
+                        <Image
+                            src="/BTS.jpg"
+                            alt="Event"
+                            fill
+                            className="object-cover"
+                            sizes="80px"
+                        />
                     </div>
 
                     <div className="flex-1">

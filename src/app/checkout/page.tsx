@@ -287,7 +287,13 @@ export default function CheckoutPage() {
           <div className="bg-white rounded-sm shadow-sm border border-gray-200 overflow-hidden">
             <div className="h-[120px] bg-black relative">
               {/* Placeholder for the user-provided image context logic, hardcoded for now based on request */}
-              <img src="/BTS.jpg" className="w-full h-full object-cover opacity-80" alt="Concert" />
+              <Image
+                src="/BTS.jpg"
+                alt="Concert"
+                fill
+                className="object-cover opacity-80"
+                sizes="380px"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
             </div>
             <div className="p-4">

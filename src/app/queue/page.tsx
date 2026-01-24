@@ -203,10 +203,13 @@ export default function QueuePage() {
                         <h2 className="text-xl font-bold text-[#1f262d] mb-8">Seat Map</h2>
 
                         <div className="mb-8 flex justify-center">
-                            <img
+                            <Image
                                 src="/map.svg"
                                 alt="Venue Map"
+                                width={900}
+                                height={600}
                                 className="w-full h-auto object-contain max-h-[600px]"
+                                loading="lazy"
                             />
                         </div>
 

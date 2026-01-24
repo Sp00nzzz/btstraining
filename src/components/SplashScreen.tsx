@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { useFacecamStore } from "@/components/Facecam";
 import LeaderboardBanner from "@/components/LeaderboardBanner";
 import CharacterSelect from "@/components/CharacterSelect";
@@ -57,16 +58,24 @@ export default function SplashScreen({ onStart }: SplashScreenProps) {
       {/* Header Bar */}
       <header className="flex-shrink-0 h-[80px] md:h-[120px] bg-[#0059e3] flex items-center px-6 md:px-12">
         <div className="flex items-center gap-4 md:gap-8 w-full">
-          <img
+          <Image
             src={imgBTSLogo}
             alt="BTS"
+            width={65}
+            height={65}
             className="h-[45px] md:h-[65px] w-auto flex-shrink-0"
+            priority
           />
-          <img
-            src={imgTicketTrainerText}
-            alt="BTS TICKET TRAINER"
-            className="h-[55px] md:h-[95px] flex-1 object-fill mix-blend-plus-lighter"
-          />
+          <div className="relative h-[55px] md:h-[95px] flex-1">
+            <Image
+              src={imgTicketTrainerText}
+              alt="BTS TICKET TRAINER"
+              fill
+              className="object-fill mix-blend-plus-lighter"
+              priority
+              sizes="(max-width: 768px) 70vw, 50vw"
+            />
+          </div>
         </div>
       </header>
 
