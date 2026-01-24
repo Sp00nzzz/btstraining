@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter, Pixelify_Sans, Nunito } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import AppShell from "@/components/AppShell";
 
@@ -45,6 +46,7 @@ export default function RootLayout({
         <AppShell>
           {children}
         </AppShell>
+        <Analytics />
       </body>
     </html>
   );
